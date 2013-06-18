@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:h="http://java.sun.com/jsf/html"
+ xmlns:f="http://java.sun.com/jsf/core"
+ xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Login</title>
+</h:head>
+ <h:body>
+ <h:outputLabel value="Login:"/>
+ <hr/> 
+ <h:form>
+ 	<table>
+ 		<tr>
+ 			<td><h:outputLabel value="Usuário:"/></td>
+ 			<td><h:inputText value="#{loginMB.usuario}" ></h:inputText></td>
+ 		</tr>
+		<tr>
+			<td><h:outputLabel value="Senha:"/></td>
+			<td><h:inputText value="#{loginMB.senha}" ></h:inputText></td>
+		</tr>
+		<tr>
+			<td><h:outputText value="Tipo: " /></td>
+			<td>	  
+				<h:selectOneMenu value="#{loginMB.tipo}">  
+	    			<f:selectItem itemLabel="Funcionário" itemValue="1" />  
+	    			<f:selectItem itemLabel="Cliente" itemValue="0" />
+				</h:selectOneMenu>  
+			</td>  
+		</tr>
+		<tr>
+			<td><h:commandButton action="#{loginMB.logar}" value="Entrar"/><br/></td>
+		</tr>
+		<tr>
+	   		<td><h:messages id="msgErro" style="color: red"></h:messages></td>
+			<td><h:outputText value="#{loginMB.msgAviso}" /></td>
+		</tr>
+	</table> 
+</h:form>
+</h:body>
+</html>
