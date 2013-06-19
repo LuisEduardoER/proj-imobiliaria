@@ -1,29 +1,26 @@
 package qi.edu.br.dao;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
 
-import qi.edu.br.model.Cliente;
+import qi.edu.br.model.Imovel;
 
-public class ClienteDao {
+public class ImovelDao {
 	EntityManagerFactory emf;
 	private EntityManager getEntityManager() {
 		return emf.createEntityManager();
 	}
 	
-	public ClienteDao() {
+	public ImovelDao() {
 		emf = Persistence.createEntityManagerFactory("prjImobiliaria");
 	}
 	
-	public void salvar(Cliente cliente) {
+	public void salvar(Imovel imovel) {
 		EntityManager em = getEntityManager();
 		try {
 			em.getTransaction().begin(); // inicia o processo de transacao
-			em.persist(cliente);// permite fazer insercoes e atualizacoes no bd
+			em.persist(imovel);// permite fazer insercoes e atualizacoes no bd
 			em.getTransaction().commit();// realizo as alteracoes no banco
 		} catch (Exception e) {
 			em.getTransaction().rollback();// se rolar uma excecao cancelo acao
@@ -33,11 +30,11 @@ public class ClienteDao {
 		}
 	}
 	
-	public void deletar(Cliente cliente) {
+	public void deletar(Imovel imovel) {
 		EntityManager em = getEntityManager();
 		try {
 			em.getTransaction().begin(); // inicia o processo de transacao
-			Cliente novo = em.find(Cliente.class, cliente.getId());
+			Imovel novo = em.find(Imovel.class, imovel.getId());
 			novo = em.merge(novo);
 			em.remove(novo);
 			em.getTransaction().commit();
@@ -49,38 +46,14 @@ public class ClienteDao {
 		}
 	}
 	
-	public void atualizar(Cliente cliente) {
+	public void atualizar(Imovel imovel) {
 		EntityManager em = getEntityManager();
 		try {
 			em.getTransaction().begin();
-			em.merge(cliente);
+			em.merge(imovel);
 			em.getTransaction().commit();
 		} catch (Exception e) {
 			em.getTransaction().rollback();
 		}
 	}
-	
-	public boolean verificaLogin(Cliente cliente) throws Exception {
-		EntityManager em = getEntityManager();
-		try {
-			Query query = em.createQuery("select cpf,senha from Cliente where cpf = :paramName and senha = :paramPass");
-			query.setParameter("paramName", cliente.getCpf());
-			query.setParameter("paramPass", cliente.getSenha());
-			List res = query.getResultList();
-			
-			if (res.isEmpty())
-				return false;
-			else
-				return true;
-		} catch (Exception e) {
-			throw e;
-		} finally {
-			em.close();
-		}
-		
-	}
-	
-	
-	
-	
 }

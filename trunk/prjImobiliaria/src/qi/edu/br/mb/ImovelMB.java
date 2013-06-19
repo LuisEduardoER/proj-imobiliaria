@@ -1,10 +1,13 @@
 package qi.edu.br.mb;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import qi.edu.br.bean.ImovelBean;
+import qi.edu.br.model.Imovel;
 
 @ManagedBean
 @ViewScoped
@@ -25,25 +28,30 @@ public class ImovelMB {
 	private int ativo;
 	private String data_imovel;
 	String msgAviso;
-	
-	/*public void save() {
-		Funcionario obj;
+
+	public void save() {
+		Imovel obj;
 		try {
 			validation();
-			obj = new Funcionario();
-			obj.setFoto(foto);
+			obj = new Imovel();
+			obj.setData_imovel(data_imovel);
+			obj.setDescricao(descricao);
+			obj.setFoto_capa(foto_capa);
+			obj.setIdCliente(idCliente);
+			obj.setIdFuncionario(idFuncionario);
+			obj.setIdTipoImovel(idTipoImovel);
 			obj.setNome(nome);
-			obj.setSenha(senha);
-			obj.setUsuario(usuario);
+			obj.setSituacao(situacao);
+			obj.setValor(valor);			
 			obj.setAtivo(1);
-			funcionarioBean.save(obj);
+			imovelBean.save(obj);
 			//funcionarioBean.delete(obj);
 			this.setMsgAviso("Gravação com sucesso!");
 		} catch (Exception e) {
 			setMessage("msgErro", e.getMessage());
 		}
-		
 	}
+	
 	private void setMessage(String objMsg, String message){
 		  FacesMessage msg = new FacesMessage(message);
 		  // Obtém a instancia atual do FacesContext e adiciona a mensagem de erro nele. 
@@ -54,7 +62,7 @@ public class ImovelMB {
 		if (this.getNome() == ""){
 			throw new Exception("Informe o Nome");
 		}
-	}*/
+	}
 	
 	public ImovelBean getImovelBean() {
 		return imovelBean;
@@ -129,5 +137,11 @@ public class ImovelMB {
 		this.data_imovel = data_imovel;
 	}
 	
-	
+	public String getMsgAviso() {
+		return msgAviso;
+	}
+
+	public void setMsgAviso(String msgAviso) {
+		this.msgAviso = msgAviso;
+	}
 }
