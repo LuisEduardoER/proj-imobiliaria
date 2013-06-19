@@ -3,33 +3,33 @@ package qi.edu.br.bean;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 
-import qi.edu.br.dao.FuncionarioDao;
-import qi.edu.br.model.Funcionario;
+import qi.edu.br.dao.ImovelDao;
+import qi.edu.br.model.Imovel;
 
 @Stateless
 @Local
 public class ImovelBean {
 
-	public void update(Funcionario obj) throws Exception{
+	public void update(Imovel obj) throws Exception{
 		try {
-			FuncionarioDao funcDao = new FuncionarioDao();
-			funcDao.atualizar(obj);
+			ImovelDao imovelDao = new ImovelDao();
+			imovelDao.atualizar(obj);
 		} catch (Exception e) {
 			throw e;
 		}
 	}
-	public void delete(Funcionario obj) throws Exception{
+	public void delete(Imovel obj) throws Exception{
 		try {
-			FuncionarioDao funcDao = new FuncionarioDao();
-			funcDao.deletar(obj);
+			ImovelDao imovelDao = new ImovelDao();
+			imovelDao.deletar(obj);
 		} catch (Exception e) {
 			throw e;
 		}
 	}
-	public void save(Funcionario obj) throws Exception{
+	public void save(Imovel obj) throws Exception{
 		try {
-			FuncionarioDao funcDao = new FuncionarioDao();
-			funcDao.salvar(obj);
+			ImovelDao imovelDao = new ImovelDao();
+			imovelDao.salvar(obj);
 		} catch (Exception e) {
 			throw e;
 		}
