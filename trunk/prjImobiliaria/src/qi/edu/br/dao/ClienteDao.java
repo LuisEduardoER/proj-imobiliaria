@@ -8,6 +8,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import qi.edu.br.model.Cliente;
+import qi.edu.br.model.Funcionario;
 
 public class ClienteDao {
 	EntityManagerFactory emf;
@@ -44,6 +45,21 @@ public class ClienteDao {
 		} catch (Exception e) {
 			em.getTransaction().rollback();// se rolar uma excecao cancelo acao
 			e.printStackTrace();// mostro o percurso de onde veio as excecoes
+		} finally {
+			em.close();
+		}
+	}
+	
+	public Cliente consultar(Cliente cliente) throws Exception{
+		EntityManager em = getEntityManager();
+		try {
+			em.getTransaction().begin(); // inicia o processo de transacao
+			Cliente novo = em.find(Cliente.class, cliente.getId());
+			return novo;
+		} catch (Exception e) {
+			em.getTransaction().rollback();// se rolar uma excecao cancelo acao
+			e.printStackTrace();// mostro o percurso de onde veio as excecoes
+			throw e;
 		} finally {
 			em.close();
 		}

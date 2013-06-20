@@ -4,7 +4,9 @@ import javax.ejb.Local;
 import javax.ejb.Stateless;
 
 import qi.edu.br.dao.ClienteDao;
+import qi.edu.br.dao.FuncionarioDao;
 import qi.edu.br.model.Cliente;
+import qi.edu.br.model.Funcionario;
 
 @Stateless
 @Local
@@ -21,6 +23,15 @@ public class ClienteBean {
 		try {
 			ClienteDao cliDao = new ClienteDao();
 			cliDao.deletar(obj);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	public Cliente find(Cliente obj) throws Exception{
+		try {
+			ClienteDao cliDao = new ClienteDao();
+			Cliente c = cliDao.consultar(obj);
+			return c;
 		} catch (Exception e) {
 			throw e;
 		}

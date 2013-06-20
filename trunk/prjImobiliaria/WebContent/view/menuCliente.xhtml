@@ -3,9 +3,10 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
  xmlns:h="http://java.sun.com/jsf/html"
- xmlns:f="http://java.sun.com/jsf/core"
- xmlns:p="http://primefaces.org/ui">
+ xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+	<link rel="stylesheet" href="../css/bootstrap-responsive.min.css" type="text/css" />
 	<title>Menu</title>
 </h:head>
  <h:body>
@@ -14,16 +15,19 @@
  <h:form>
  	<table>
  		<tr>
+ 			<td><h2>Cliente</h2></td>
+ 		</tr>
+ 		<tr>
  			<td>
- 				<h:outputLabel value="Cliente"/>
  				<ul>
- 					<li><h:commandLink value="Cad.Imóvel" action="cadImovel.xhtml" /></li>
+ 					<li><h:commandLink value="Cad.Imóvel" action="cadFuncionario.xhtml" /></li>
  					<li><h:commandLink value="Propostas" action="cadProposta.xhtml" /></li>
  				</ul>
  			</td>
- 			<td>
+ 			<td></td>
+ 			<td style="border-left : 1px solid;">
  				<ul> 					
- 					<li><h:commandLink value="Consultar Imóvel" action="locImovel.jsp" /></li>
+ 					<li><h:commandLink value="Consultar Imóvel" action="locImovel.xhtml" /></li>
  				</ul>
  			</td>
  		</tr>

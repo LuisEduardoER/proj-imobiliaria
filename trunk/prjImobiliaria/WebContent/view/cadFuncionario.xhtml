@@ -5,9 +5,11 @@
  xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
 	<title>Cadastro de Funcionários</title>
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+	<link rel="stylesheet" href="../css/bootstrap-responsive.min.css" type="text/css" />
 </h:head>
  <h:body>
- <h:outputLabel value="Cad.Funcionário:"/>
+ <h2>Cad.Funcionário</h2>
  <hr/> 
  <h:form>
  	<table>
@@ -28,7 +30,7 @@
 			<td><h:inputText value="#{funcionarioMB.foto}" ></h:inputText></td>
 		</tr>	   
 		<tr>
-			<td><h:commandButton action="#{funcionarioMB.save}" value="Gravar"/><br/></td>
+			<td><h:commandButton action="#{funcionarioMB.save}" value="Gravar" class="btn btn-primary"/><br/></td>
 		</tr>
 		<tr>
 	   		<td><h:messages id="msgErro" style="color: red"></h:messages></td>
