@@ -5,6 +5,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import qi.edu.br.bean.ClienteBean;
 import qi.edu.br.model.Cliente;
@@ -32,7 +33,36 @@ public class ClienteMB {
 	String senha;
 	String ativo;
 	String msgAviso;
+	String alterar;
 	
+	public ClienteMB() {
+		FacesContext context = FacesContext.getCurrentInstance(); 
+		HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
+		if(session.getAttribute("verificaCli")!= null){
+			Cliente cli;
+			cli = new Cliente();
+			cli = (Cliente) session.getAttribute("clienteAlt");
+			this.setNome(cli.getNome());
+			this.setEndereco(cli.getEndereco());
+			this.setNumero(String.valueOf(cli.getNumero()));
+			this.setBairro(cli.getBairro());
+			this.setCep(cli.getCep());
+			this.setComplemento(cli.getComplemento());
+			this.setUf(cli.getUf());
+			this.setEmail(cli.getEmail());
+			this.setRenda(String.valueOf(cli.getRenda()));
+			this.setTelefone(cli.getTelefone());
+			this.setTelComercial(cli.getTelComercial());
+			this.setCpf(cli.getCpf());
+			this.setSenha(cli.getSenha());
+			this.setAtivo(String.valueOf(cli.getAtivo()));
+			
+			this.setId(String.valueOf(cli.getId()));
+			this.setAlterar("1");
+			session.removeAttribute("verificaCli");
+		}
+		//this.setMsgAviso("id ->!"+fun.getNome());
+	}
 	public void save() {
 		Cliente obj;
 		try {
@@ -158,6 +188,12 @@ public class ClienteMB {
 	}
 	public void setMsgAviso(String msgAviso) {
 		this.msgAviso = msgAviso;
+	}
+	public String getAlterar() {
+		return alterar;
+	}
+	public void setAlterar(String alterar) {
+		this.alterar = alterar;
 	}
 	
 	

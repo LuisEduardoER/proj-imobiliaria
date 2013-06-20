@@ -51,6 +51,21 @@ public class FuncionarioDao{
 		}
 	}
 	
+	public Funcionario consultar(Funcionario funcionario) throws Exception{
+		EntityManager em = getEntityManager();
+		try {
+			em.getTransaction().begin(); // inicia o processo de transacao
+			Funcionario novo = em.find(Funcionario.class, funcionario.getId());
+			return novo;
+		} catch (Exception e) {
+			em.getTransaction().rollback();// se rolar uma excecao cancelo acao
+			e.printStackTrace();// mostro o percurso de onde veio as excecoes
+			throw e;
+		} finally {
+			em.close();
+		}
+	}
+	
 	public void atualizar(Funcionario funcionario) {
 		EntityManager em = getEntityManager();
 		try {

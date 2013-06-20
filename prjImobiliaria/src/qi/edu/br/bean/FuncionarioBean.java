@@ -34,6 +34,16 @@ public class FuncionarioBean {
 		}
 	}
 	
+	public Funcionario find(Funcionario obj) throws Exception{
+		try {
+			FuncionarioDao funcDao = new FuncionarioDao();
+			Funcionario f = funcDao.consultar(obj);
+			return f;
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
 	public boolean login(Funcionario obj) throws Exception{
 		try {
 			FuncionarioDao funcDao = new FuncionarioDao();

@@ -30,13 +30,14 @@ public class LoginMB {
 				f.setUsuario(usuario);
 				f.setSenha(senha);
 				boolean verifica = funcionarioBean.login(f);
+				//boolean verifica = true;
 				if(verifica == true){
 					FacesContext ctx = FacesContext.getCurrentInstance();  
 					String url = ctx.getExternalContext().encodeResourceURL("http://localhost:8080/prjImobiliaria/view/menuFuncionario.xhtml");  
 					ctx.getExternalContext().redirect(url);
 					this.setMsgAviso("Achou!  "+tipo);
 				}else{
-					this.setMsgAviso("erro! Usuário ou senha invalido. ");
+					this.setMsgAviso("erro!  "+tipo);
 				}
 				//FacesContext.getCurrentInstance()
 				//this.setMsgAviso("Você é um Funcionario!  "+tipo);	
@@ -45,12 +46,13 @@ public class LoginMB {
 				c.setCpf(usuario);
 				c.setSenha(senha);
 				boolean verifica = clienteBean.login(c);
+				//boolean verifica = true;
 				if(verifica == true){
 					FacesContext ctx = FacesContext.getCurrentInstance();  
-					String url = ctx.getExternalContext().encodeResourceURL("http://localhost:8080/prjImobiliaria/view/menuCliente.xhtml");  
+					String url = ctx.getExternalContext().encodeResourceURL("http://localhost:8080/prjImobiliaria/view/cadCliente.xhtml");  
 					ctx.getExternalContext().redirect(url);
 				}else{
-					this.setMsgAviso("Erro! Usuário ou senha inválido.");
+					this.setMsgAviso("Erro!  "+tipo);
 				}
 				//this.setMsgAviso("Você é um Cliente!  "+tipo);
 			}
