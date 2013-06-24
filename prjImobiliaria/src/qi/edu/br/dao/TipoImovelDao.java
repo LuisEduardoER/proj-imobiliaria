@@ -1,9 +1,13 @@
 package qi.edu.br.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
+import qi.edu.br.model.Cliente;
 import qi.edu.br.model.TipoImovel;
 
 public class TipoImovelDao {
@@ -25,6 +29,21 @@ public class TipoImovelDao {
 		} catch (Exception e) {
 			em.getTransaction().rollback();// se rolar uma excecao cancelo acao
 			e.printStackTrace();// mostro o percurso de onde veio as excecoes
+		} finally {
+			em.close();
+		}
+	}
+	
+	public List<TipoImovel> findAll() throws Exception{
+		EntityManager em = getEntityManager();
+		try {
+			em.getTransaction().begin();
+			Query query = em.createQuery("select t from TipoImovel t order by descricao");
+			return query.getResultList();
+		} catch (Exception e) {
+			em.getTransaction().rollback();// se rolar uma excecao cancelo acao
+			e.printStackTrace();// mostro o percurso de onde veio as excecoes
+			throw e;
 		} finally {
 			em.close();
 		}

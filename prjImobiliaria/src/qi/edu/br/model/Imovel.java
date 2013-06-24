@@ -1,6 +1,7 @@
 package qi.edu.br.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +25,7 @@ public class Imovel  implements Serializable {
 	private double valor;
 	private String descricao;
 	private int ativo;
-	private String data_imovel;
+	private Date data_imovel;
 	
 	public int getId() {
 		return id;
@@ -80,11 +81,11 @@ public class Imovel  implements Serializable {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public String getData_imovel() {
+	public Date getData_imovel() {
 		return data_imovel;
 	}
-	public void setData_imovel(String data_imovel) {
-		this.data_imovel = data_imovel;
+	public void setData_imovel(Date data_imovel2) {
+		this.data_imovel = data_imovel2;
 	}
 	public int getAtivo() {
 		return ativo;

@@ -99,5 +99,20 @@ public class FuncionarioDao{
 		}
 		
 	}
+	
+	public List<Funcionario> findAll() throws Exception{
+		EntityManager em = getEntityManager();
+		try {
+			em.getTransaction().begin();
+			Query query = em.createQuery("select f from Funcionario f order by nome");
+			return query.getResultList();
+		} catch (Exception e) {
+			em.getTransaction().rollback();// se rolar uma excecao cancelo acao
+			e.printStackTrace();// mostro o percurso de onde veio as excecoes
+			throw e;
+		} finally {
+			em.close();
+		}
+	}
 
 }
