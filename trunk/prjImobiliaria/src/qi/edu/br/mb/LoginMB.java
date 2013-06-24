@@ -30,7 +30,6 @@ public class LoginMB {
 				f.setUsuario(usuario);
 				f.setSenha(senha);
 				boolean verifica = funcionarioBean.login(f);
-				//boolean verifica = true;
 				if(verifica == true){
 					FacesContext ctx = FacesContext.getCurrentInstance();  
 					String url = ctx.getExternalContext().encodeResourceURL("http://localhost:8080/prjImobiliaria/view/menuFuncionario.xhtml");  

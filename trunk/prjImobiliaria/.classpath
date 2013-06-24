@@ -35,5 +35,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/slf4j-api-1.6.1.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/slf4j-simple-1.6.1.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/upgrade-tool.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/primefaces-2.2-sources.jar" sourcepath="WebContent/WEB-INF/lib/primefaces-2.2-sources.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

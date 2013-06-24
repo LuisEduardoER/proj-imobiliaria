@@ -1,10 +1,14 @@
 package qi.edu.br.mb;
 
+import java.util.Date;
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 
 import qi.edu.br.bean.ImovelBean;
 import qi.edu.br.model.Imovel;
@@ -26,8 +30,45 @@ public class ImovelMB {
 	private double valor;
 	private String descricao;
 	private int ativo;
-	private String data_imovel;
+	private Date data_imovel;
 	String msgAviso;
+	
+	private List<SelectItem> listaCliente;
+	private List<SelectItem> listaFuncionario;
+	private List<SelectItem> listaTipoImovel;
+
+	public ImovelMB() throws Exception {
+		//super(); 
+		imovelBean = new ImovelBean();
+		this.listaCliente = imovelBean.getListaCliente();
+		
+		this.listaFuncionario = imovelBean.getListaFuncionario();
+		this.listaTipoImovel = imovelBean.getListaTipoImovel();
+	}
+
+	public List<SelectItem> getListaFuncionario() {
+		return listaFuncionario;
+	}
+
+	public void setListaFuncionario(List<SelectItem> listaFuncionario) {
+		this.listaFuncionario = listaFuncionario;
+	}
+
+	public List<SelectItem> getListaTipoImovel() {
+		return listaTipoImovel;
+	}
+
+	public void setListaTipoImovel(List<SelectItem> listaTipoImovel) {
+		this.listaTipoImovel = listaTipoImovel;
+	}
+
+	public List<SelectItem> getListaCliente() {
+		return listaCliente;
+	}
+
+	public void setListaCliente(List<SelectItem> listaCliente) {
+		this.listaCliente = listaCliente;
+	}
 
 	public void save() {
 		Imovel obj;
@@ -130,10 +171,10 @@ public class ImovelMB {
 	public void setAtivo(int ativo) {
 		this.ativo = ativo;
 	}
-	public String getData_imovel() {
+	public Date getData_imovel() {
 		return data_imovel;
 	}
-	public void setData_imovel(String data_imovel) {
+	public void setData_imovel(Date data_imovel) {
 		this.data_imovel = data_imovel;
 	}
 	

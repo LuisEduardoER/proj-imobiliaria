@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import qi.edu.br.model.Cliente;
 import qi.edu.br.model.Imovel;
 
 public class ImovelDao {
@@ -54,6 +55,21 @@ public class ImovelDao {
 			em.getTransaction().commit();
 		} catch (Exception e) {
 			em.getTransaction().rollback();
+		}
+	}
+	
+	public Imovel consultar(Imovel imovel) throws Exception{
+		EntityManager em = getEntityManager();
+		try {
+			em.getTransaction().begin(); // inicia o processo de transacao
+			Imovel novo = em.find(Imovel.class, imovel.getId());
+			return novo;
+		} catch (Exception e) {
+			em.getTransaction().rollback();// se rolar uma excecao cancelo acao
+			e.printStackTrace();// mostro o percurso de onde veio as excecoes
+			throw e;
+		} finally {
+			em.close();
 		}
 	}
 }

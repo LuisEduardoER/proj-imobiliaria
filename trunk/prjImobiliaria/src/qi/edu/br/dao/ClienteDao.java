@@ -65,6 +65,21 @@ public class ClienteDao {
 		}
 	}
 	
+	public List<Cliente> findAll() throws Exception{
+		EntityManager em = getEntityManager();
+		try {
+			em.getTransaction().begin();
+			Query query = em.createQuery("select c from Cliente c order by nome");
+			return query.getResultList();
+		} catch (Exception e) {
+			em.getTransaction().rollback();// se rolar uma excecao cancelo acao
+			e.printStackTrace();// mostro o percurso de onde veio as excecoes
+			throw e;
+		} finally {
+			em.close();
+		}
+	}
+	
 	public void atualizar(Cliente cliente) {
 		EntityManager em = getEntityManager();
 		try {

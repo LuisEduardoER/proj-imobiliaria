@@ -42,7 +42,7 @@ public class Cliente implements Serializable{
 	@Column
 	private String senha;
 	@Column
-	private int ativo;
+	private int ativo = 1;
 	@Column
 	
 	public int getId() {
