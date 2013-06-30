@@ -10,9 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import qi.edu.br.bean.ClienteBean;
-import qi.edu.br.bean.FuncionarioBean;
 import qi.edu.br.model.Cliente;
-import qi.edu.br.model.Funcionario;
 
 /**
  * Servlet implementation class locCliente

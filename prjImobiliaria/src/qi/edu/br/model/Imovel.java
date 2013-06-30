@@ -20,12 +20,22 @@ public class Imovel  implements Serializable {
 	private int idFuncionario;
 	private int idTipoImovel;
 	private String nome;
-	private int situacao;
+	private String situacao;
 	private String foto_capa;
 	private double valor;
 	private String descricao;
+	private String status;
 	private int ativo;
 	private Date data_imovel;
+	
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
 	
 	public int getId() {
 		return id;
@@ -57,10 +67,10 @@ public class Imovel  implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public int getSituacao() {
+	public String getSituacao() {
 		return situacao;
 	}
-	public void setSituacao(int situacao2) {
+	public void setSituacao(String situacao2) {
 		this.situacao = situacao2;
 	}
 	public String getFoto_capa() {

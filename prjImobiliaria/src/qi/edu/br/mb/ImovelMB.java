@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpSession;
 
 import org.primefaces.event.FileUploadEvent;
 
@@ -27,14 +28,16 @@ public class ImovelMB {
 	private int idFuncionario;
 	private int idTipoImovel;
 	private String nome;
-	private int situacao;
+	private String situacao;
 	private String foto_capa;
 	private double valor;
 	private String descricao;
 	private int ativo;
 	private Date data_imovel;
-	String msgAviso;
-	
+	private String alterar;
+	private String msgAviso;
+	private String status;
+
 	private List<SelectItem> listaCliente;
 	private List<SelectItem> listaFuncionario;
 	private List<SelectItem> listaTipoImovel;
@@ -45,7 +48,7 @@ public class ImovelMB {
     }
 
 	public ImovelMB() throws Exception {
-		//super(); 
+		super(); 
 		imovelBean = new ImovelBean();
 		this.listaCliente = imovelBean.getListaCliente();
 		
@@ -91,10 +94,34 @@ public class ImovelMB {
 			obj.setNome(nome);
 			obj.setSituacao(situacao);
 			obj.setValor(valor);			
-			obj.setAtivo(1);
-			imovelBean.save(obj);
-			//funcionarioBean.delete(obj);
-			this.setMsgAviso("Gravação com sucesso!");
+			obj.setAtivo(Integer.parseInt(status));
+			
+			if(alterar != null){
+				obj.setId(id);
+				imovelBean.update(obj);
+				
+				FacesContext ctx = FacesContext.getCurrentInstance();
+				HttpSession session = (HttpSession) ctx.getExternalContext().getSession(false);
+				if(session.getAttribute("tipoUsuario") == "1"){
+					String url = ctx.getExternalContext().encodeResourceURL("http://localhost:8080/prjImobiliaria/view/menuFunc.jsp?msg=alterar");  
+					ctx.getExternalContext().redirect(url);
+				}else{
+					String url = ctx.getExternalContext().encodeResourceURL("http://localhost:8080/prjImobiliaria/view/menuCli.jsp?msg=alterar");  
+					ctx.getExternalContext().redirect(url);
+				}
+				
+			}else{
+				imovelBean.save(obj);
+				FacesContext ctx = FacesContext.getCurrentInstance();
+				HttpSession session = (HttpSession) ctx.getExternalContext().getSession(false);
+				if(session.getAttribute("tipoUsuario") == "1"){
+					String url = ctx.getExternalContext().encodeResourceURL("http://localhost:8080/prjImobiliaria/view/menuFunc.jsp?msg=cadastrar");  
+					ctx.getExternalContext().redirect(url);
+				}else{
+					String url = ctx.getExternalContext().encodeResourceURL("http://localhost:8080/prjImobiliaria/view/menuCli.jsp?msg=cadastrar");  
+					ctx.getExternalContext().redirect(url);
+				}
+			}
 		} catch (Exception e) {
 			setMessage("msgErro", e.getMessage());
 		}
@@ -148,10 +175,10 @@ public class ImovelMB {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public int getSituacao() {
+	public String getSituacao() {
 		return situacao;
 	}
-	public void setSituacao(int situacao) {
+	public void setSituacao(String situacao) {
 		this.situacao = situacao;
 	}
 	public String getFoto_capa() {
@@ -191,5 +218,13 @@ public class ImovelMB {
 
 	public void setMsgAviso(String msgAviso) {
 		this.msgAviso = msgAviso;
+	}
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 }
