@@ -2,6 +2,7 @@
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:f="http://java.sun.com/jsf/core"
  xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
 	<title>Cadastro de Funcionários</title>
@@ -13,12 +14,9 @@
  <hr/> 
  <h:form>
  	<table>
- 	
  		<tr>
  			<td><h:outputLabel value="Nome: "/></td>
- 			<td><h:selectOneMenu value="#{funcionarioMB.nome}" >
- 					
- 				</h:selectOneMenu></td>
+ 			<td><h:inputText value="#{funcionarioMB.nome}" ></h:inputText></td>
  		</tr>
 		<tr>
 			<td><h:outputLabel value="Usuário: "/></td>
@@ -31,7 +29,16 @@
 		<tr>
 			<td><h:outputLabel value="Foto: "/></td>
 			<td><h:inputText value="#{funcionarioMB.foto}" ></h:inputText></td>
-		</tr>	   
+		</tr>	  
+		<tr>
+ 			<td><h:outputLabel value="Status: "/></td>
+ 			<td>
+ 				<h:selectOneMenu value="#{funcionarioMB.status}">  
+	    			<f:selectItem itemLabel="Ativado" itemValue="1" />  
+	    			<f:selectItem itemLabel="Desativado" itemValue="0" />
+				</h:selectOneMenu>
+			</td>
+		</tr> 
 		<tr>
 			<td><h:commandButton action="#{funcionarioMB.save}" value="Gravar" class="btn btn-primary"/><br/></td>
 		</tr>

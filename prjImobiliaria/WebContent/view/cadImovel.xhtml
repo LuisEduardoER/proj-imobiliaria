@@ -1,20 +1,16 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
- "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml"  
     xmlns:ui="http://java.sun.com/jsf/facelets"  
     xmlns:h="http://java.sun.com/jsf/html"  
-    xmlns:f="http://java.sun.com/jsf/core"  
-    xmlns:p="http://www.primefaces.org/ui" > 
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui" > 
 <h:head>
-	<title>Cadastro de Imóvel</title>
-	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
-	<link rel="stylesheet" href="../css/bootstrap-responsive.min.css" type="text/css" />
+	<title>Cadastro de Imóvel</title>	
 </h:head>
+
  <h:body>
- <h:outputLabel value="Cad.Imovel:"/>
- <hr/> 
- <h:form>
+ <p:growl id="avisos" showDetail="true" life="3000" />
+ 
+ <h:form enctype="multipart/form-data">
  	<table>
  		<tr>
  			<td><h:outputLabel value="Nome:"/></td>
@@ -45,11 +41,18 @@
 			</td>
 		</tr>
 		
+		<tr>
+			<td><h:outputLabel value="Situação"/></td>
+			<td><h:selectOneMenu value="#{imovelMB.situacao}">
+            		<f:selectItems itemvalue="0" itemLabel="Planta" />
+            		<f:selectItems itemvalue="1" itemLabel="Novo" />
+            		<f:selectItems itemvalue="2" itemLabel="Usado" />
+				</h:selectOneMenu> 
+			</td>
+		</tr>
+		
 		<!--  
-	private String situacao;
-	private String foto_capa;
-	private int ativo;
-	private String data_imovel; 
+	private String foto_capa; 
  	*/-->
  	
  		<tr>
@@ -62,24 +65,22 @@
  			<td><h:outputLabel value="Descrição:"/></td>
  			<td><h:inputText value="#{imovelMB.descricao}" required="true" 
  				requiredMessage="Preencha o campo Descrição do Imóvel!"/></td>
- 		</tr>
- 		
- 		<h:outputText value="Data cadastro:" />
-                    <p:calendar value="#{testeBean.dataCadastro}" />
+ 		</tr>	
  		
  		<tr>
- 			<td><h:outputLabel value="Data:"/></td>
- 			<p:inputMask mask="99/99/9999" value="#{imovelMB.data_imovel}" /> 
- 			
- 			    <p:calendar value="#{calendarBean.data1}" pages="3" locale="pt_BR"  
-        pattern="dd/MM/yyyy" id="C1">  
-      <p:ajax event="dateSelect" listener="#{calendarBean.handleDateSelect}"  
-            process="@form" />  
-    </p:calendar>  
- 		</tr>
+ 			<td>
+ 				<p:fileUpload fileUploadListener="#{imovelMB.handleFileUpload}"  
+            	mode="advanced"  
+            	update="messages"  
+            	auto="true"  
+            	sizeLimit="100000"    
+            	allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>  
+  
+    			<p:growl id="messages" showDetail="true"/>  
+ 			</td>
+ 		</tr>	
 		
-		
-		<tr>
+		<tr>		    
 			<td><h:commandButton action="#{imovelMB.save}" value="Gravar" class="btn btn-primary"/><br/></td> 
 		</tr>
 		<tr>
@@ -87,14 +88,7 @@
 			<td><h:outputText value="#{imovelMB.msgAviso}" /></td>
 		</tr>
 	</table> 
-	
-	<p:inputMask mask="99/99/9999" value="#{imovelMB.data_imovel}" /> 
  			
- 			    <p:calendar value="#{calendarBean.data1}" pages="3" locale="pt_BR"  
-        pattern="dd/MM/yyyy" id="C1">  
-      <p:ajax event="dateSelect" listener="#{calendarBean.handleDateSelect}"  
-            process="@form" />  
-    </p:calendar>  
 </h:form>
 </h:body>
 </html>

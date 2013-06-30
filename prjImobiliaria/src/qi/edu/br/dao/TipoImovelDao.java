@@ -48,4 +48,46 @@ public class TipoImovelDao {
 			em.close();
 		}
 	}
+	
+	public void deletar(TipoImovel tipoImovel) {
+		EntityManager em = getEntityManager();
+		try {
+			em.getTransaction().begin(); // inicia o processo de transacao
+			TipoImovel novo = em.find(TipoImovel.class, tipoImovel.getId());
+			novo = em.merge(novo);
+			em.remove(novo);
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			em.getTransaction().rollback();// se rolar uma excecao cancelo acao
+			e.printStackTrace();// mostro o percurso de onde veio as excecoes
+		} finally {
+			em.close();
+		}
+	}
+	
+	public TipoImovel consultar(TipoImovel tipoImovel) throws Exception{
+		EntityManager em = getEntityManager();
+		try {
+			em.getTransaction().begin(); // inicia o processo de transacao
+			TipoImovel novo = em.find(TipoImovel.class, tipoImovel.getId());
+			return novo;
+		} catch (Exception e) {
+			em.getTransaction().rollback();// se rolar uma excecao cancelo acao
+			e.printStackTrace();// mostro o percurso de onde veio as excecoes
+			throw e;
+		} finally {
+			em.close();
+		}
+	}
+	
+	public void atualizar(TipoImovel tipoImovel) {
+		EntityManager em = getEntityManager();
+		try {
+			em.getTransaction().begin();
+			em.merge(tipoImovel);
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			em.getTransaction().rollback();
+		}
+	}
 }

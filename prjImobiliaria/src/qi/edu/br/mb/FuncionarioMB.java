@@ -25,6 +25,7 @@ public class FuncionarioMB {
 	String msgAviso;
 	String alterar;
 	String val;
+	String status;
 	
 	public FuncionarioMB() {
 		FacesContext context = FacesContext.getCurrentInstance(); 
@@ -39,6 +40,7 @@ public class FuncionarioMB {
 			this.setSenha(fun.getSenha());
 			this.setId(String.valueOf(fun.getId()));
 			this.setAlterar("1");
+			this.setStatus(String.valueOf(fun.getAtivo()));
 			session.removeAttribute("verificaFunc");
 		}
 		//this.setMsgAviso("id ->!"+fun.getNome());
@@ -53,17 +55,34 @@ public class FuncionarioMB {
 			obj.setNome(nome);
 			obj.setSenha(senha);
 			obj.setUsuario(usuario);
-			obj.setAtivo(1);
+obj.setAtivo(Integer.parseInt(status));
+			
 			if(alterar != null){
 				obj.setId(Integer.parseInt(id));
 				funcionarioBean.update(obj);
-				this.setMsgAviso("Cadastro alterado com sucesso!");
+				
+				FacesContext ctx = FacesContext.getCurrentInstance();
+				HttpSession session = (HttpSession) ctx.getExternalContext().getSession(false);
+				if(session.getAttribute("tipoUsuario") == "1"){
+					String url = ctx.getExternalContext().encodeResourceURL("http://localhost:8080/prjImobiliaria/view/menuFunc.jsp?msg=alterar");  
+					ctx.getExternalContext().redirect(url);
+				}else{
+					String url = ctx.getExternalContext().encodeResourceURL("http://localhost:8080/prjImobiliaria/view/menuCli.jsp?msg=alterar");  
+					ctx.getExternalContext().redirect(url);
+				}
+				
 			}else{
 				funcionarioBean.save(obj);
-				this.setMsgAviso("Cadastrado realizado com sucesso!");
+				FacesContext ctx = FacesContext.getCurrentInstance();
+				HttpSession session = (HttpSession) ctx.getExternalContext().getSession(false);
+				if(session.getAttribute("tipoUsuario") == "1"){
+					String url = ctx.getExternalContext().encodeResourceURL("http://localhost:8080/prjImobiliaria/view/menuFunc.jsp?msg=cadastrar");  
+					ctx.getExternalContext().redirect(url);
+				}else{
+					String url = ctx.getExternalContext().encodeResourceURL("http://localhost:8080/prjImobiliaria/view/menuCli.jsp?msg=cadastrar");  
+					ctx.getExternalContext().redirect(url);
+				}
 			}
-			
-			//funcionarioBean.delete(obj);
 			
 		} catch (Exception e) {
 			setMessage("msgErro", e.getMessage());
@@ -132,6 +151,12 @@ public class FuncionarioMB {
 		this.alterar = alterar;
 	}
 	
-	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 }

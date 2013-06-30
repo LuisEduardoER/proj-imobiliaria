@@ -15,6 +15,7 @@ public class TipoImovel implements Serializable {
 	@GeneratedValue
 	private int id;
 	private String descricao;
+	private int ativo;
 	
 	public int getId() {
 		return id;
@@ -28,6 +29,11 @@ public class TipoImovel implements Serializable {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
+	public int getAtivo() {
+		return ativo;
+	}
+	public void setAtivo(int ativo) {
+		this.ativo = ativo;
+	}
 	
 }

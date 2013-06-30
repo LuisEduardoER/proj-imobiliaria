@@ -1,12 +1,12 @@
 <%
 	if(request.getParameter("alterar") != null){
-			qi.edu.br.model.Funcionario f = new qi.edu.br.model.Funcionario();
-			f.setId(Integer.parseInt(request.getParameter("id")));
-			qi.edu.br.bean.FuncionarioBean fbean = new qi.edu.br.bean.FuncionarioBean();
-			f = fbean.find(f);
-			session.setAttribute("verificaFunc", "alterar");
-			session.setAttribute("funcionarioAlt", f);
-			response.sendRedirect("cadFuncionario.xhtml");  
+			qi.edu.br.model.TipoImovel tp = new qi.edu.br.model.TipoImovel();
+			tp.setId(Integer.parseInt(request.getParameter("id")));
+			qi.edu.br.bean.TipoImovelBean tpbean = new qi.edu.br.bean.TipoImovelBean();
+			tp = tpbean.find(tp);
+			session.setAttribute("verificaTipoImovel", "alterar");
+			session.setAttribute("tipoImovelAlt", tp);
+			response.sendRedirect("cadTipoImovel.xhtml");  
 			
 		}
 %>
@@ -16,14 +16,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Consultar Funcionário</title>
+<title>Consultar Tipo de Imóvel</title>
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
 <link rel="stylesheet" href="../css/bootstrap-responsive.min.css" type="text/css" />
 </head>
 <body>
-	<h2>Localizar Funcionário</h2>
+	<h2>Localizar Tipo de Imóvel</h2>
  	<hr/> 
-	<form action="../locFuncionario" method="POST">
+	<form action="../locTipoImovel" method="POST">
 	<table>
 		<tr>
 			<td>Código:</td>
@@ -39,12 +39,12 @@
 	<% 
 
 		if(request.getParameter("excluir") != null){
-			qi.edu.br.model.Funcionario f = new qi.edu.br.model.Funcionario();
-			f.setId(Integer.parseInt(request.getParameter("id")));
-			qi.edu.br.bean.FuncionarioBean fbean = new qi.edu.br.bean.FuncionarioBean();
-			f = fbean.find(f);
-			f.setAtivo(0);
-			fbean.update(f);
+			qi.edu.br.model.TipoImovel tp = new qi.edu.br.model.TipoImovel();
+			tp.setId(Integer.parseInt(request.getParameter("id")));
+			qi.edu.br.bean.TipoImovelBean tpbean = new qi.edu.br.bean.TipoImovelBean();
+			tp = tpbean.find(tp);
+			tp.setAtivo(0);
+			tpbean.update(tp);
 			
 			if(session.getAttribute("tipoUsuario") == "1"){
 				response.sendRedirect("menuFunc.jsp?msg=excluir");
@@ -53,9 +53,9 @@
 			}
 		}
 
-		if(session.getAttribute("funcionario") != null){
-			qi.edu.br.model.Funcionario f = new qi.edu.br.model.Funcionario();
-			f = (qi.edu.br.model.Funcionario)session.getAttribute("funcionario");
+		if(session.getAttribute("tipoImovel") != null){
+			qi.edu.br.model.TipoImovel tp = new qi.edu.br.model.TipoImovel();
+			tp = (qi.edu.br.model.TipoImovel)session.getAttribute("tipoImovel");
 			out.println("<br />");
 			out.println("<br />");
 			out.println("<br />");
@@ -68,41 +68,32 @@
 			//out.println("</tr>");
 			out.println("<tr>");
 				out.println("<td>Código:");out.println("</td>");
-				out.println("<td>"+f.getId());out.println("</td>");
+				out.println("<td>"+tp.getId());out.println("</td>");
 			out.println("</tr>");
 			
 			out.println("<tr>");
-				out.println("<td>Nome:");out.println("</td>");
-				out.println("<td>"+f.getNome());out.println("</td>");
-			out.println("</tr>");
-			
-			out.println("<tr>");
-				out.println("<td>Usuário");out.println("</td>");
-				out.println("<td>"+f.getUsuario());out.println("</td>");
-			out.println("</tr>");
-			
-			out.println("<tr>");
-				out.println("<td>Foto");out.println("</td>");
-				out.println("<td>"+f.getFoto());out.println("</td>");
+				out.println("<td>Descrição:");out.println("</td>");
+				out.println("<td>"+tp.getDescricao());out.println("</td>");
 			out.println("</tr>");
 			
 			out.println("<tr>");
 				out.println("<td>Status");out.println("</td>");
-				if(f.getAtivo() == 1){
+				if(tp.getAtivo() == 1){
 					out.println("<td> Ativado");out.println("</td>");	
 				}else{
 					out.println("<td> Desativado");out.println("</td>");
 				}
+				
 			out.println("</tr>");
 			
 			out.println("<tr>");
-				out.println("<td><a href=\'locFuncionario.jsp?alterar=alterar&id="+f.getId()+"\'>Alterar</a>");out.println("</td>");
-				out.println("<td><a href=\'locFuncionario.jsp?excluir=excluir&id="+f.getId()+"\'>Excluir</a>");out.println("</td>");
+				out.println("<td><a href=\'locTipoImovel.jsp?alterar=alterar&id="+tp.getId()+"\'>Alterar</a>");out.println("</td>");
+				out.println("<td><a href=\'locTipoImovel.jsp?excluir=excluir&id="+tp.getId()+"\'>Excluir</a>");out.println("</td>");
 			out.println("</tr>");
 			
 			out.println("</table>");
 			
-			session.setAttribute("funcionario", null);
+			session.setAttribute("tipoImovel", null);
 			
 		}else{
 			//out.println("Funcionário não encontrado");				

@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 
 import qi.edu.br.bean.ClienteBean;
 import qi.edu.br.model.Cliente;
-import qi.edu.br.model.Funcionario;
 
 @ManagedBean
 @ViewScoped
@@ -34,6 +33,7 @@ public class ClienteMB {
 	String ativo;
 	String msgAviso;
 	String alterar;
+	String status;
 	
 	public ClienteMB() {
 		FacesContext context = FacesContext.getCurrentInstance(); 
@@ -56,7 +56,7 @@ public class ClienteMB {
 			this.setCpf(cli.getCpf());
 			this.setSenha(cli.getSenha());
 			this.setAtivo(String.valueOf(cli.getAtivo()));
-			
+			this.setStatus(String.valueOf(cli.getAtivo()));
 			this.setId(String.valueOf(cli.getId()));
 			this.setAlterar("1");
 			session.removeAttribute("verificaCli");
@@ -80,9 +80,35 @@ public class ClienteMB {
 			obj.setRenda(Double.parseDouble(renda));
 			obj.setTelefone(telefone);
 			obj.setSenha(senha);
-			obj.setAtivo(1);
-			clienteBean.save(obj);
-			this.setMsgAviso("Gravação com sucesso!");
+			obj.setAtivo(Integer.parseInt(status));
+			
+			if(alterar != null){
+				obj.setId(Integer.parseInt(id));
+				clienteBean.update(obj);
+				
+				FacesContext ctx = FacesContext.getCurrentInstance();
+				HttpSession session = (HttpSession) ctx.getExternalContext().getSession(false);
+				if(session.getAttribute("tipoUsuario") == "1"){
+					String url = ctx.getExternalContext().encodeResourceURL("http://localhost:8080/prjImobiliaria/view/menuFunc.jsp?msg=alterar");  
+					ctx.getExternalContext().redirect(url);
+				}else{
+					String url = ctx.getExternalContext().encodeResourceURL("http://localhost:8080/prjImobiliaria/view/menuCli.jsp?msg=alterar");  
+					ctx.getExternalContext().redirect(url);
+				}
+				
+			}else{
+				clienteBean.save(obj);
+				FacesContext ctx = FacesContext.getCurrentInstance();
+				HttpSession session = (HttpSession) ctx.getExternalContext().getSession(false);
+				if(session.getAttribute("tipoUsuario") == "1"){
+					String url = ctx.getExternalContext().encodeResourceURL("http://localhost:8080/prjImobiliaria/view/menuFunc.jsp?msg=cadastrar");  
+					ctx.getExternalContext().redirect(url);
+				}else{
+					String url = ctx.getExternalContext().encodeResourceURL("http://localhost:8080/prjImobiliaria/view/menuCli.jsp?msg=cadastrar");  
+					ctx.getExternalContext().redirect(url);
+				}
+				
+			}
 		} catch (Exception e) {
 			setMessage("msgErro", e.getMessage());
 		}
@@ -196,6 +222,11 @@ public class ClienteMB {
 		this.alterar = alterar;
 	}
 	
-	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 }

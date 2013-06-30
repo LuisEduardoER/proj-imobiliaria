@@ -10,6 +10,8 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
+import org.primefaces.event.FileUploadEvent;
+
 import qi.edu.br.bean.ImovelBean;
 import qi.edu.br.model.Imovel;
 
@@ -25,7 +27,7 @@ public class ImovelMB {
 	private int idFuncionario;
 	private int idTipoImovel;
 	private String nome;
-	private String situacao;
+	private int situacao;
 	private String foto_capa;
 	private double valor;
 	private String descricao;
@@ -36,6 +38,11 @@ public class ImovelMB {
 	private List<SelectItem> listaCliente;
 	private List<SelectItem> listaFuncionario;
 	private List<SelectItem> listaTipoImovel;
+	
+	public void handleFileUpload(FileUploadEvent event) {  
+        FacesMessage msg = new FacesMessage("Sucesso", event.getFile().getFileName() + " is uploaded.");  
+        FacesContext.getCurrentInstance().addMessage(null, msg);  
+    }
 
 	public ImovelMB() throws Exception {
 		//super(); 
@@ -75,7 +82,7 @@ public class ImovelMB {
 		try {
 			validation();
 			obj = new Imovel();
-			obj.setData_imovel(data_imovel);
+			obj.setData_imovel(new Date());
 			obj.setDescricao(descricao);
 			obj.setFoto_capa(foto_capa);
 			obj.setIdCliente(idCliente);
@@ -141,10 +148,10 @@ public class ImovelMB {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getSituacao() {
+	public int getSituacao() {
 		return situacao;
 	}
-	public void setSituacao(String situacao) {
+	public void setSituacao(int situacao) {
 		this.situacao = situacao;
 	}
 	public String getFoto_capa() {

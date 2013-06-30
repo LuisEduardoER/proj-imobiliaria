@@ -5,6 +5,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import qi.edu.br.bean.ClienteBean;
 import qi.edu.br.bean.FuncionarioBean;
@@ -32,28 +33,27 @@ public class LoginMB {
 				boolean verifica = funcionarioBean.login(f);
 				if(verifica == true){
 					FacesContext ctx = FacesContext.getCurrentInstance();  
-					String url = ctx.getExternalContext().encodeResourceURL("http://localhost:8080/prjImobiliaria/view/menuFuncionario.xhtml");  
+					String url = ctx.getExternalContext().encodeResourceURL("http://localhost:8080/prjImobiliaria/view/menuFunc.jsp");  
 					ctx.getExternalContext().redirect(url);
-					this.setMsgAviso("Achou!  "+tipo);
+					HttpSession session = (HttpSession) ctx.getExternalContext().getSession(false);
+					session.setAttribute("tipoUsuario", "1");
 				}else{
-					this.setMsgAviso("erro!  "+tipo);
+					this.setMsgAviso("Usuário Inválido!");
 				}
-				//FacesContext.getCurrentInstance()
-				//this.setMsgAviso("Você é um Funcionario!  "+tipo);	
 			}else{
 				Cliente c = new Cliente();
 				c.setCpf(usuario);
 				c.setSenha(senha);
 				boolean verifica = clienteBean.login(c);
-				//boolean verifica = true;
 				if(verifica == true){
 					FacesContext ctx = FacesContext.getCurrentInstance();  
-					String url = ctx.getExternalContext().encodeResourceURL("http://localhost:8080/prjImobiliaria/view/cadCliente.xhtml");  
+					String url = ctx.getExternalContext().encodeResourceURL("http://localhost:8080/prjImobiliaria/view/menuCli.jsp");  
 					ctx.getExternalContext().redirect(url);
+					HttpSession session = (HttpSession) ctx.getExternalContext().getSession(false);
+					session.setAttribute("tipoUsuario", "0");
 				}else{
-					this.setMsgAviso("Erro!  "+tipo);
+					this.setMsgAviso("Usuário Inválido!");
 				}
-				//this.setMsgAviso("Você é um Cliente!  "+tipo);
 			}
 			
 		} catch (Exception e) {

@@ -17,4 +17,30 @@ public class TipoImovelBean {
 			throw e;
 		}
 	}
+	
+	public void update(TipoImovel obj) throws Exception{
+		try {
+			TipoImovelDao tpDao = new TipoImovelDao();
+			tpDao.atualizar(obj);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	public void delete(TipoImovel obj) throws Exception{
+		try {
+			TipoImovelDao tpDao = new TipoImovelDao();
+			tpDao.deletar(obj);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	public TipoImovel find(TipoImovel obj) throws Exception{
+		try {
+			TipoImovelDao tpDao = new TipoImovelDao();
+			TipoImovel tpi = tpDao.consultar(obj);
+			return tpi;
+		} catch (Exception e) {
+			throw e;
+		}
+	}
 }
