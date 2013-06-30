@@ -54,6 +54,15 @@ public class ImovelBean {
 			throw e;
 		}
 	}
+	public List<Imovel> localizaImovel (Imovel obj) throws Exception{
+		try {
+			ImovelDao imovelDao = new ImovelDao();
+			List<Imovel> c = imovelDao.localizaImovel(obj);
+			return c;
+		} catch (Exception e) {
+			throw e;
+		}
+	}
 	
 	public List<SelectItem> getListaCliente() throws Exception { //
         ArrayList<SelectItem> lista = new ArrayList<SelectItem>();
