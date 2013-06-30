@@ -1,7 +1,9 @@
 package qi.edu.br.util;
 
 import java.util.Date;
-import org.primefaces.event.*;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 
 public class CalendarBean {
@@ -11,6 +13,16 @@ public class CalendarBean {
     private Date date2;  
       
     private Date date3;  
+    
+    public CalendarBean(){
+    	setDate2(new Date());
+    }
+    
+    public void testar(){
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, 
+        		"Aviso", "Testado com sucesso!"));
+    }
       
     public Date getDate1() {  
         return date1;  

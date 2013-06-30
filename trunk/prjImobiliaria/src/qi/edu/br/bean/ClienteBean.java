@@ -4,9 +4,7 @@ import javax.ejb.Local;
 import javax.ejb.Stateless;
 
 import qi.edu.br.dao.ClienteDao;
-import qi.edu.br.dao.FuncionarioDao;
 import qi.edu.br.model.Cliente;
-import qi.edu.br.model.Funcionario;
 
 @Stateless
 @Local

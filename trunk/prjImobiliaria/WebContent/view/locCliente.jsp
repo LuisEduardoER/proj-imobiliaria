@@ -45,7 +45,12 @@
 			c = cbean.find(c);
 			c.setAtivo(0);
 			cbean.update(c);
-			out.println("Registro excluído com sucesso");
+			
+			if(session.getAttribute("tipoUsuario") == "1"){
+				response.sendRedirect("menuFunc.jsp?msg=excluir");
+			}else{
+				response.sendRedirect("menuCli.jsp?msg=excluir");
+			}
 		}
 	
 		if(session.getAttribute("cliente") != null){
@@ -104,7 +109,16 @@
 			out.println("<tr>");
 				out.println("<td>Telefone");out.println("</td>");
 				out.println("<td>"+c.getTelefone());out.println("</td>");
-		out.println("</tr>");
+			out.println("</tr>");
+			
+			out.println("<tr>");
+			out.println("<td>Status");out.println("</td>");
+				if(c.getAtivo() == 1){
+					out.println("<td> Ativado");out.println("</td>");	
+				}else{
+					out.println("<td> Desativado");out.println("</td>");
+				}
+			out.println("</tr>");
 			
 			out.println("<tr>");
 				out.println("<td><a href=\'locCliente.jsp?alterar=alterar&id="+c.getId()+"\'>Alterar</a>");out.println("</td>");

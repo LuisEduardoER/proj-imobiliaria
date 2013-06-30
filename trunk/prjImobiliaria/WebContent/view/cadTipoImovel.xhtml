@@ -2,6 +2,7 @@
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:f="http://java.sun.com/jsf/core"
  xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
 	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
@@ -9,16 +10,25 @@
 	<title>Cadastro Tipo de Imóvel</title>
 </h:head>
  <h:body>
- <h:outputLabel value="Cad.Tipo de Imóvel:"/>
+ <h2>Cad.Tipo de Imóvel</h2>
  <hr/> 
  <h:form>
  	<table>
  		<tr>
  			<td><h:outputLabel value="Descricao: "/></td>
  			<td><h:inputText value="#{tipoImovelMB.descricao}" ></h:inputText></td>
- 		</tr>   
+ 		</tr>
+ 		<tr>
+ 			<td><h:outputLabel value="Status: "/></td>
+ 			<td>
+ 				<h:selectOneMenu value="#{tipoImovelMB.status}">  
+	    			<f:selectItem itemLabel="Ativado" itemValue="1" />  
+	    			<f:selectItem itemLabel="Desativado" itemValue="0" />
+				</h:selectOneMenu>
+			</td>
+		</tr> 
 		<tr>
-			<td><h:commandButton action="#{tipoImovelMB.save}" value="Gravar"/><br/></td>
+			<td><h:commandButton action="#{tipoImovelMB.save}" value="Gravar"  class="btn btn-primary"/><br/></td>
 		</tr>
 		<tr>
 	   		<td><h:messages id="msgErro" style="color: red"></h:messages></td>
