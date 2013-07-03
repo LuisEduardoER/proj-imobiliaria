@@ -14,16 +14,16 @@ public class Proposta implements Serializable {
 	@Id
 	@GeneratedValue
 	private int id;
-	@Column
+	@Column(name="id_imovel")
 	private int idImovel;
-	@Column
+	@Column(name="valor_venda")
 	private double valorVenda;
-	@Column
+	@Column(name="valor_proposto")
 	private double valorProposto;
 	@Column
-	private boolean tipo;
-	@Column
-	private String contatoCliente;
+	private String tipo;
+	@Column(name="id_cliente")
+	private int idCliente;
 	
 	public int getId() {
 		return id;
@@ -49,18 +49,20 @@ public class Proposta implements Serializable {
 	public void setValorProposto(double valorProposto) {
 		this.valorProposto = valorProposto;
 	}
-	public boolean isTipo() {
+	
+	public String getTipo() {
 		return tipo;
 	}
-	public void setTipo(boolean tipo) {
+	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-	public String getContatoCliente() {
-		return contatoCliente;
+	public int getIdCliente() {
+		return idCliente;
 	}
-	public void setContatoCliente(String contatoCliente) {
-		this.contatoCliente = contatoCliente;
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
 	}
+	
 	
 	
 }

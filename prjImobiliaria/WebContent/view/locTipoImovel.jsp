@@ -60,7 +60,7 @@
 			out.println("<br />");
 			out.println("<br />");
 			
-			out.println("<table border='1px' width='300px' height='90px'>");
+			out.println("<table class='table' width='300px' height='90px'>");
 			
 			//out.println("<tr>");
 				//out.println("<td>Código:");out.println("<td>");

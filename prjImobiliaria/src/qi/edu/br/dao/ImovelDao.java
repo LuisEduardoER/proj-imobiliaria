@@ -77,9 +77,25 @@ public class ImovelDao {
 	
 	public List<Imovel> localizaImovel(Imovel imovel) throws Exception{
 		EntityManager em = getEntityManager();
+		String x = "";
+		
+		if (!String.valueOf(imovel.getId()).equals(""))
+			x= " and id = " + imovel.getId(); 
+		if ((!String.valueOf(imovel.getValor()).equals("")) && !(imovel.getValor() == 0))
+			x= " and valor = " + imovel.getValor(); 
+		
+		if (imovel.getIdTipoImovel() != -1)
+			x= " and idTipoImovel = " + imovel.getIdTipoImovel(); 
+		
+		if (!imovel.getSituacao().equals("-1"))
+			x= " and situacao = " + imovel.getSituacao(); 
+		
 		try {
 			em.getTransaction().begin(); // inicia o processo de transacao
-			Query query = em.createQuery("select f from Imovel f " + "order by nome");
+			Query query = em.createQuery("select f from Imovel f where 1=1 "
+			+ x		
+			+ "order by nome");
+			
 			return query.getResultList();
 		} catch (Exception e) {
 			em.getTransaction().rollback();// se rolar uma excecao cancelo acao

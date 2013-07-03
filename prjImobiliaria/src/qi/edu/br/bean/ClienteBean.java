@@ -56,4 +56,15 @@ public class ClienteBean {
 			throw e;
 		}
 	}
+	
+	public Cliente findPorUser(Cliente obj) throws Exception{
+		try {
+			ClienteDao cliDao = new ClienteDao();
+			List<Cliente> lista =  cliDao.consultarPorUsuario(obj);
+			Cliente c = lista.get(0); 
+			return c;
+		} catch (Exception e) {
+			throw e;
+		}
+	}
 }

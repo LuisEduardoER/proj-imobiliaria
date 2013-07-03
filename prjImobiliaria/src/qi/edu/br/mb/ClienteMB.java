@@ -66,6 +66,7 @@ public class ClienteMB {
 	public void save() {
 		Cliente obj;
 		try {
+			validation();
 			obj = new Cliente();
 			obj.setNome(nome);
 			obj.setBairro(bairro);
@@ -114,6 +115,64 @@ public class ClienteMB {
 		}
 		
 	}
+	
+	private void validation() throws Exception {
+		if (this.getNome() == ""){
+			throw new Exception("Informe o Nome");
+		}
+		if (this.getEndereco() == ""){
+			throw new Exception("Informe o Enredeço");
+		}
+		
+		if (!Numeric.isNumeric(this.getNumero()) || 
+				Integer.parseInt(this.getNumero()) <= 0) 
+				
+		{
+			throw new Exception("Informe o Número" +
+					" / somente nros e positivo");
+		}
+		
+		if (this.getBairro() == ""){
+			throw new Exception("Informe o Bairro");
+		}
+		
+		if (this.getCep() == ""){
+			throw new Exception("Informe o Cep");
+		}
+		
+		if (this.getComplemento() == ""){
+			throw new Exception("Informe o Complemento");
+		}
+		
+		if (this.getUf() == ""){
+			throw new Exception("Informe o UF");
+		}
+		
+		if (!Numeric.isNumeric(this.getRenda()) || 
+				Integer.parseInt(this.getRenda()) <= 0) 
+				
+		{
+			throw new Exception("Informe a Renda" +
+					" / somente nros e positivo");
+		}
+		
+		if (this.getEmail() == ""){
+			throw new Exception("Informe o Email");
+		}
+		
+		if (this.getTelefone() == ""){
+			throw new Exception("Informe o Telefone");
+		}
+		
+		if (this.getCpf() == ""){
+			throw new Exception("Informe o cpf");
+		}
+		
+		if (this.getSenha() == ""){
+			throw new Exception("Informe a senha");
+		}
+	}
+	
 	private void setMessage(String objMsg, String message){
 		  FacesMessage msg = new FacesMessage(message);
 		  /* Obtém a instancia atual do FacesContext e adiciona a mensagem de erro nele. */

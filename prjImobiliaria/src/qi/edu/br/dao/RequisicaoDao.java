@@ -8,23 +8,26 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import qi.edu.br.model.Cliente;
-import qi.edu.br.model.Funcionario;
+import qi.edu.br.model.RequisicaoSenha;
 
-public class ClienteDao {
+public class RequisicaoDao {
+
+
 	EntityManagerFactory emf;
+
 	private EntityManager getEntityManager() {
 		return emf.createEntityManager();
 	}
-	
-	public ClienteDao() {
+
+	public RequisicaoDao() {
 		emf = Persistence.createEntityManagerFactory("prjImobiliaria");
 	}
-	
-	public void salvar(Cliente cliente) {
+
+	public void salvar(RequisicaoSenha requisicao) {
 		EntityManager em = getEntityManager();
 		try {
 			em.getTransaction().begin(); // inicia o processo de transacao
-			em.persist(cliente);// permite fazer insercoes e atualizacoes no bd
+			em.persist(requisicao);// permite fazer insercoes e atualizacoes no bd
 			em.getTransaction().commit();// realizo as alteracoes no banco
 		} catch (Exception e) {
 			em.getTransaction().rollback();// se rolar uma excecao cancelo acao
@@ -34,11 +37,11 @@ public class ClienteDao {
 		}
 	}
 	
-	public void deletar(Cliente cliente) {
+	public void deletar(RequisicaoSenha requisicao) {
 		EntityManager em = getEntityManager();
 		try {
 			em.getTransaction().begin(); // inicia o processo de transacao
-			Cliente novo = em.find(Cliente.class, cliente.getId());
+			RequisicaoSenha novo = em.find(RequisicaoSenha.class, requisicao.getId());
 			novo = em.merge(novo);
 			em.remove(novo);
 			em.getTransaction().commit();
@@ -50,11 +53,11 @@ public class ClienteDao {
 		}
 	}
 	
-	public Cliente consultar(Cliente cliente) throws Exception{
+	public RequisicaoSenha consultar(RequisicaoSenha requisicao) throws Exception{
 		EntityManager em = getEntityManager();
 		try {
 			em.getTransaction().begin(); // inicia o processo de transacao
-			Cliente novo = em.find(Cliente.class, cliente.getId());
+			RequisicaoSenha novo = em.find(RequisicaoSenha.class, requisicao.getId());
 			return novo;
 		} catch (Exception e) {
 			em.getTransaction().rollback();// se rolar uma excecao cancelo acao
@@ -65,38 +68,23 @@ public class ClienteDao {
 		}
 	}
 	
-	public List<Cliente> findAll() throws Exception{
+	public void atualizar(RequisicaoSenha requisicao) {
 		EntityManager em = getEntityManager();
 		try {
 			em.getTransaction().begin();
-			Query query = em.createQuery("select c from Cliente c order by nome");
-			return query.getResultList();
-		} catch (Exception e) {
-			em.getTransaction().rollback();// se rolar uma excecao cancelo acao
-			e.printStackTrace();// mostro o percurso de onde veio as excecoes
-			throw e;
-		} finally {
-			em.close();
-		}
-	}
-	
-	public void atualizar(Cliente cliente) {
-		EntityManager em = getEntityManager();
-		try {
-			em.getTransaction().begin();
-			em.merge(cliente);
+			em.merge(requisicao);
 			em.getTransaction().commit();
 		} catch (Exception e) {
 			em.getTransaction().rollback();
 		}
 	}
 	
-	public boolean verificaLogin(Cliente cliente) throws Exception {
+	public boolean verificaCpf(RequisicaoSenha r) throws Exception {
 		EntityManager em = getEntityManager();
 		try {
-			Query query = em.createQuery("select cpf,senha from Cliente where cpf = :paramName and senha = :paramPass");
-			query.setParameter("paramName", cliente.getCpf());
-			query.setParameter("paramPass", cliente.getSenha());
+			Query query = em.createQuery("select cpf from Cliente where cpf = :paramName and id = :paramPass");
+			query.setParameter("paramName", r.getCpf());
+			query.setParameter("paramPass", r.getIdCliente());
 			List res = query.getResultList();
 			
 			if (res.isEmpty())
@@ -108,15 +96,14 @@ public class ClienteDao {
 		} finally {
 			em.close();
 		}
-		
 	}
 	
-	public List consultarPorUsuario(Cliente cliente) throws Exception {
+	public List findAll() throws Exception {
 		EntityManager em = getEntityManager();
 		try {
-			Query query = em.createQuery("select id from Cliente where cpf = :paramName and senha = :paramPass");
-			query.setParameter("paramName", cliente.getCpf());
-			query.setParameter("paramPass", cliente.getSenha());
+			em.getTransaction().begin(); // inicia o processo de transacao
+			Query query = em.createQuery("select p from RequisicaoSenha p ");
+			
 			List res = query.getResultList();
 			
 			if (res.isEmpty())
@@ -127,8 +114,7 @@ public class ClienteDao {
 			throw e;
 		} finally {
 			em.close();
-		}	
+		}
+		
 	}
-	
-	
 }

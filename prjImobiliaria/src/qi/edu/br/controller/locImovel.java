@@ -26,7 +26,6 @@ public class locImovel extends HttpServlet {
      */
     public locImovel() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
