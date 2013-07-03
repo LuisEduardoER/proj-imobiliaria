@@ -51,6 +51,7 @@ public class LoginMB {
 					ctx.getExternalContext().redirect(url);
 					HttpSession session = (HttpSession) ctx.getExternalContext().getSession(false);
 					session.setAttribute("tipoUsuario", "0");
+					session.setAttribute("cliente", c);
 				}else{
 					this.setMsgAviso("Usuário Inválido!");
 				}

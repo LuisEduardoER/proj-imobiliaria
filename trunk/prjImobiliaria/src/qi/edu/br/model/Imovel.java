@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "imovel")
+@Table(name = "Imovel")
 public class Imovel  implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -34,8 +34,7 @@ public class Imovel  implements Serializable {
 	}
 	public void setStatus(String status) {
 		this.status = status;
-	}
-	
+	}	
 	
 	public int getId() {
 		return id;

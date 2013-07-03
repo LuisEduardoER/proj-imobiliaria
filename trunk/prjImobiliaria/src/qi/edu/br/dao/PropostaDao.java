@@ -1,5 +1,6 @@
 package qi.edu.br.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -7,24 +8,26 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import qi.edu.br.model.Cliente;
 import qi.edu.br.model.Funcionario;
+import qi.edu.br.model.Proposta;
 
-public class ClienteDao {
+public class PropostaDao {
+
 	EntityManagerFactory emf;
+
 	private EntityManager getEntityManager() {
 		return emf.createEntityManager();
 	}
-	
-	public ClienteDao() {
+
+	public PropostaDao() {
 		emf = Persistence.createEntityManagerFactory("prjImobiliaria");
 	}
-	
-	public void salvar(Cliente cliente) {
+
+	public void salvar(Proposta proposta) {
 		EntityManager em = getEntityManager();
 		try {
 			em.getTransaction().begin(); // inicia o processo de transacao
-			em.persist(cliente);// permite fazer insercoes e atualizacoes no bd
+			em.persist(proposta);// permite fazer insercoes e atualizacoes no bd
 			em.getTransaction().commit();// realizo as alteracoes no banco
 		} catch (Exception e) {
 			em.getTransaction().rollback();// se rolar uma excecao cancelo acao
@@ -34,11 +37,11 @@ public class ClienteDao {
 		}
 	}
 	
-	public void deletar(Cliente cliente) {
+	public void deletar(Proposta proposta) {
 		EntityManager em = getEntityManager();
 		try {
 			em.getTransaction().begin(); // inicia o processo de transacao
-			Cliente novo = em.find(Cliente.class, cliente.getId());
+			Proposta novo = em.find(Proposta.class, proposta.getId());
 			novo = em.merge(novo);
 			em.remove(novo);
 			em.getTransaction().commit();
@@ -50,11 +53,11 @@ public class ClienteDao {
 		}
 	}
 	
-	public Cliente consultar(Cliente cliente) throws Exception{
+	public Proposta consultar(Proposta proposta) throws Exception{
 		EntityManager em = getEntityManager();
 		try {
 			em.getTransaction().begin(); // inicia o processo de transacao
-			Cliente novo = em.find(Cliente.class, cliente.getId());
+			Proposta novo = em.find(Proposta.class, proposta.getId());
 			return novo;
 		} catch (Exception e) {
 			em.getTransaction().rollback();// se rolar uma excecao cancelo acao
@@ -65,44 +68,29 @@ public class ClienteDao {
 		}
 	}
 	
-	public List<Cliente> findAll() throws Exception{
+	public void atualizar(Proposta proposta) {
 		EntityManager em = getEntityManager();
 		try {
 			em.getTransaction().begin();
-			Query query = em.createQuery("select c from Cliente c order by nome");
-			return query.getResultList();
-		} catch (Exception e) {
-			em.getTransaction().rollback();// se rolar uma excecao cancelo acao
-			e.printStackTrace();// mostro o percurso de onde veio as excecoes
-			throw e;
-		} finally {
-			em.close();
-		}
-	}
-	
-	public void atualizar(Cliente cliente) {
-		EntityManager em = getEntityManager();
-		try {
-			em.getTransaction().begin();
-			em.merge(cliente);
+			em.merge(proposta);
 			em.getTransaction().commit();
 		} catch (Exception e) {
 			em.getTransaction().rollback();
 		}
 	}
 	
-	public boolean verificaLogin(Cliente cliente) throws Exception {
+	public List findAll() throws Exception {
 		EntityManager em = getEntityManager();
 		try {
-			Query query = em.createQuery("select cpf,senha from Cliente where cpf = :paramName and senha = :paramPass");
-			query.setParameter("paramName", cliente.getCpf());
-			query.setParameter("paramPass", cliente.getSenha());
+			em.getTransaction().begin(); // inicia o processo de transacao
+			Query query = em.createQuery("select p from Proposta p ");
+			
 			List res = query.getResultList();
 			
 			if (res.isEmpty())
-				return false;
+				return res;
 			else
-				return true;
+				return res;
 		} catch (Exception e) {
 			throw e;
 		} finally {
@@ -110,25 +98,5 @@ public class ClienteDao {
 		}
 		
 	}
-	
-	public List consultarPorUsuario(Cliente cliente) throws Exception {
-		EntityManager em = getEntityManager();
-		try {
-			Query query = em.createQuery("select id from Cliente where cpf = :paramName and senha = :paramPass");
-			query.setParameter("paramName", cliente.getCpf());
-			query.setParameter("paramPass", cliente.getSenha());
-			List res = query.getResultList();
-			
-			if (res.isEmpty())
-				return res;
-			else
-				return res;
-		} catch (Exception e) {
-			throw e;
-		} finally {
-			em.close();
-		}	
-	}
-	
-	
+
 }

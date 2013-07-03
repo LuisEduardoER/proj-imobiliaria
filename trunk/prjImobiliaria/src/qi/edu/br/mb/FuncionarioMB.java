@@ -55,7 +55,7 @@ public class FuncionarioMB {
 			obj.setNome(nome);
 			obj.setSenha(senha);
 			obj.setUsuario(usuario);
-obj.setAtivo(Integer.parseInt(status));
+			obj.setAtivo(Integer.parseInt(status));
 			
 			if(alterar != null){
 				obj.setId(Integer.parseInt(id));
@@ -98,6 +98,17 @@ obj.setAtivo(Integer.parseInt(status));
 	private void validation() throws Exception {
 		if (this.getNome() == ""){
 			throw new Exception("Informe o Nome");
+		}
+		if (this.getFoto() == ""){
+			throw new Exception("Informe o caminho da foto");
+		}
+		
+		if (this.getSenha() == ""){
+			throw new Exception("Informe a Senha");
+		}
+		
+		if (this.getUsuario() == ""){
+			throw new Exception("Informe o Usuário");
 		}
 	}
 	

@@ -39,6 +39,7 @@ public class TipoImovelMB {
 	public void save() {
 		TipoImovel obj;
 		try {
+			validation();
 			obj = new TipoImovel();
 			obj.setDescricao(descricao);
 			obj.setAtivo(Integer.parseInt(status));
@@ -72,6 +73,13 @@ public class TipoImovelMB {
 		}
 		
 	}
+	
+	private void validation() throws Exception {
+		if (this.getDescricao() == ""){
+			throw new Exception("Informe a Descricao");
+		}
+	}
+	
 	private void setMessage(String objMsg, String message){
 		  FacesMessage msg = new FacesMessage(message);
 		  /* Obtém a instancia atual do FacesContext e adiciona a mensagem de erro nele. */

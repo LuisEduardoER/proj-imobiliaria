@@ -20,7 +20,7 @@
  		</tr>
 		<tr>
 			<td><h:outputLabel value="Senha:"/></td>
-			<td><h:inputText value="#{loginMB.senha}" ></h:inputText></td>
+			<td><h:inputSecret value="#{loginMB.senha}" ></h:inputSecret></td>
 		</tr>
 		<tr>
 			<td><h:outputText value="Tipo: " /></td>
@@ -33,6 +33,7 @@
 		</tr>
 		<tr>
 			<td><h:commandButton action="#{loginMB.logar}" value="Entrar" class="btn btn-primary"/><br/></td>
+			<td><h:commandLink action="novaSenha.jsp" value="esqueci a senha" /><br/></td>
 		</tr>
 		<tr>
 	   		<td><h:messages id="msgErro" style="color: red"></h:messages></td>

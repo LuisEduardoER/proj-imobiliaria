@@ -6,7 +6,8 @@
      <class>qi.edu.br.model.Cliente</class>
      <class>qi.edu.br.model.Imovel</class>
      <class>qi.edu.br.model.Proposta</class>
-     <class>qi.edu.br.model.TipoImovel</class>     
+     <class>qi.edu.br.model.TipoImovel</class>  
+     <class>qi.edu.br.model.RequisicaoSenha</class>     
      
     <properties>
 	  <property name="hibernate.show_sql" value="true" />

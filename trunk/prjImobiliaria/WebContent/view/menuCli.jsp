@@ -16,16 +16,13 @@
  		<tr>
  			<td>
  				<ul>
- 					<li><a href="cadImovel.xhtml">Cad.Imóvel</a></li>
- 					<li><a href="cadProposta.xhtml">Propostas</a></li>
+ 					<li><a href="novaSenha.jsp">Solicitar Nova Senha</a></li>
  				</ul>
  			</td>
  			<td></td>
  			<td style="border-left : 1px solid;">
  				<ul> 					
- 					<li><a href="locImovel.jspl">localizar Imóvel</a></li>
- 					<li><a href="locFuncionario.jsp">localizar Funcionário</a></li>
- 					<li><a href="locTipoImovel.jsp">localizar Tipo de Imóvel</a></li>
+ 					<li><a href="locImovel.jsp">localizar Imóvel</a></li>
  				</ul>
  			</td>
  		</tr>
@@ -44,6 +41,9 @@
 			
 			if(msg.equals("excluir")){
 				out.println("<h2> Registro Excluído com Sucesso </h2>");	
+			}
+			if(msg.equals("requisicao")){
+				out.println("<h2> Nova senha gerada e enviada ao email do solicitante. </h2>");	
 			}
 		}
 	%>

@@ -1,18 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
 	if (request.getParameter("alterar") != null) {
-		qi.edu.br.model.TipoImovel tp = new qi.edu.br.model.TipoImovel();
+		qi.edu.br.model.Imovel tp = new qi.edu.br.model.Imovel();
 		tp.setId(Integer.parseInt(request.getParameter("id")));
-		qi.edu.br.bean.TipoImovelBean tpbean = new qi.edu.br.bean.TipoImovelBean();
+		qi.edu.br.bean.ImovelBean tpbean = new qi.edu.br.bean.ImovelBean();
 		tp = tpbean.find(tp);
-		session.setAttribute("verificaTipoImovel", "alterar");
-		session.setAttribute("tipoImovelAlt", tp);
-		response.sendRedirect("cadTipoImovel.xhtml");
+		session.setAttribute("verificaImovel", "alterar");
+		session.setAttribute("imovelAlt", tp);
+		response.sendRedirect("cadImovel.xhtml");
 
 	}
 %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<%@page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <html>
@@ -97,72 +98,77 @@
 		}
 
 		if (session.getAttribute("Imovel") != null) {
-			List<qi.edu.br.model.Imovel> tp;
-			tp = session.getAttribute("Imovel"); //(List<qi.edu.br.model.Imovel>) 
+			ArrayList<qi.edu.br.model.Imovel> i;
 			
-			for tp
+			i = (ArrayList<qi.edu.br.model.Imovel>) session.getAttribute("Imovel"); //(List<qi.edu.br.model.Imovel>) 
 			
-			out.println("<br />");
-			out.println("<br />");
-			out.println("<br />");
-
+			
 			out.println("<table border='1px' width='300px' height='90px'>");
-
-			out.println("<tr>");
-			out.println("<td>Código:");
-			out.println("</td>");
-			out.println("<td>" + tp.getId());
-			out.println("</td>");
-			out.println("</tr>");
-
-			out.println("<tr>");
-			out.println("<td>Nome:");
-			out.println("</td>");
-			out.println("<td>" + tp.getNome());
-			out.println("</td>");
-			out.println("</tr>");
-
-			out.println("<tr>");
-			out.println("<td>Tipo:");
-			out.println("</td>");
-			out.println("<td>" + tp.getIdTipoImovel());
-			out.println("</td>");
-			out.println("</tr>");
-
-			out.println("<tr>");
-			out.println("<td>Situação:");
-			out.println("</td>");
-			switch (Integer.parseInt(tp.getSituacao())) {
-			case 0:
-				out.println("<td> Planta </td>");
-				break;
-			case 1:
-				out.println("<td> Novo </td>");
-				break;
-			case 2:
-				out.println("<td> Usado </td>");
-				break;
+			
+			out.println("<br />");
+			out.println("<br />");
+			out.println("<br />");
+			
+			for (qi.edu.br.model.Imovel tp : i) {
+			
+				out.println("<tr>");
+				out.println("<td>Código:");
+				out.println("</td>");
+				out.println("<td>" + tp.getId());
+				out.println("</td>");
+				out.println("</tr>");
+	
+				out.println("<tr>");
+				out.println("<td>Nome:");
+				out.println("</td>");
+				out.println("<td>" + tp.getNome());
+				out.println("</td>");
+				out.println("</tr>");
+	
+				out.println("<tr>");
+				out.println("<td>Tipo:");
+				out.println("</td>");
+				out.println("<td>" + tp.getIdTipoImovel());
+				out.println("</td>");
+				out.println("</tr>");
+	
+				out.println("<tr>");
+				out.println("<td>Situação:");
+				out.println("</td>");
+				switch (Integer.parseInt(tp.getSituacao())) {
+				case 0:
+					out.println("<td> Planta </td>");
+					break;
+				case 1:
+					out.println("<td> Novo </td>");
+					break;
+				case 2:
+					out.println("<td> Usado </td>");
+					break;
+				}
+	
+				out.println("</tr>");
+	
+				out.println("<tr>");
+				out.println("<td>Valor:");
+				out.println("</td>");
+				out.println("<td>" + tp.getValor());
+				out.println("</td>");
+				out.println("</tr>");
+	
+				out.println("<tr>");
+				out.println("<td><a href=\'locImovel.jsp?alterar=alterar&id="
+						+ tp.getId() + "\'>Alterar</a>");
+				out.println("</td>");
+				out.println("<td><a href=\'locImovel.jsp?excluir=excluir&id="
+						+ tp.getId() + "\'>Excluir</a>");
+				out.println("</td>");
+				out.println("</td>");
+				out.println("<td><a href=\'cadproposta.jsp?excluir=excluir&id="
+						+ tp.getId() + "\'>Enviar Proposta</a>");
+				out.println("</td>");
+				out.println("</tr>");
 			}
-
-			out.println("</tr>");
-
-			out.println("<tr>");
-			out.println("<td>Valor:");
-			out.println("</td>");
-			out.println("<td>" + tp.getValor());
-			out.println("</td>");
-			out.println("</tr>");
-
-			out.println("<tr>");
-			out.println("<td><a href=\'locImovel.jsp?alterar=alterar&id="
-					+ tp.getId() + "\'>Alterar</a>");
-			out.println("</td>");
-			out.println("<td><a href=\'locImovel.jsp?excluir=excluir&id="
-					+ tp.getId() + "\'>Excluir</a>");
-			out.println("</td>");
-			out.println("</tr>");
-			
-			
 
 			out.println("</table>");
 

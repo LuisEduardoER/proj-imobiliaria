@@ -32,7 +32,6 @@ public class ImovelMB {
 	private String foto_capa;
 	private double valor;
 	private String descricao;
-	private int ativo;
 	private Date data_imovel;
 	private String alterar;
 	private String msgAviso;
@@ -87,14 +86,14 @@ public class ImovelMB {
 			obj = new Imovel();
 			obj.setData_imovel(new Date());
 			obj.setDescricao(descricao);
-			obj.setFoto_capa(foto_capa);
+			obj.setFoto_capa("11");
 			obj.setIdCliente(idCliente);
 			obj.setIdFuncionario(idFuncionario);
 			obj.setIdTipoImovel(idTipoImovel);
 			obj.setNome(nome);
 			obj.setSituacao(situacao);
 			obj.setValor(valor);			
-			obj.setAtivo(Integer.parseInt(status));
+			obj.setAtivo(1);//Integer.parseInt(status));
 			
 			if(alterar != null){
 				obj.setId(id);
@@ -198,12 +197,6 @@ public class ImovelMB {
 	}
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}
-	public int getAtivo() {
-		return ativo;
-	}
-	public void setAtivo(int ativo) {
-		this.ativo = ativo;
 	}
 	public Date getData_imovel() {
 		return data_imovel;
