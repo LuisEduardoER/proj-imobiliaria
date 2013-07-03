@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import qi.edu.br.bean.ClienteBean;
 import qi.edu.br.model.Cliente;
+import qi.edu.br.util.Numeric;
 
 @ManagedBean
 @ViewScoped
