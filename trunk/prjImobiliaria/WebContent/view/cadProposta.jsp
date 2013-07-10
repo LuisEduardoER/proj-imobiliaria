@@ -1,4 +1,6 @@
+<%@page import="org.apache.jasper.tagplugins.jstl.ForEach"%>
 <%@page import="qi.edu.br.model.Cliente"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
@@ -21,9 +23,10 @@
 		tp = ibean.find(tp);  
 	}
 	
-	//Cliente c = (qi.edu.br.model.Cliente) session.getAttribute("cliente");
-	//qi.edu.br.bean.ClienteBean cbean = new qi.edu.br.bean.ClienteBean();
-	//c = cbean.find(c); 
+	ArrayList<Cliente> c;
+	
+	qi.edu.br.bean.ClienteBean cbean = new qi.edu.br.bean.ClienteBean();
+	c = cbean.findAll(); 
 %>
 
 <body>
@@ -41,8 +44,17 @@
 		</tr>
 		<tr>
 			<td><font color="red">Nome do Cliente:</font></td>
-			<td><input type="text" name="nomeCliente"
-				value="<%//out.println(c.getNome());%>"/></td>
+			<td>
+				<select name="cbNomeCliente">
+					<%
+						for (Cliente cliente : c){ 
+							out.println("<option value='" + cliente.getId() + "'>");
+							out.println(cliente.getNome());
+							out.println("</option>"); 
+						}
+					%>
+				</select>
+			</td>
 		</tr>
 		<tr>
 			<td><font color="red">Valor Proposto:</font></td>

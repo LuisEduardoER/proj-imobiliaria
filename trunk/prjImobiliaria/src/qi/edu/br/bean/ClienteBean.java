@@ -1,5 +1,6 @@
 package qi.edu.br.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Local;
@@ -36,6 +37,17 @@ public class ClienteBean {
 			throw e;
 		}
 	}
+	
+	public ArrayList<Cliente> findAll() throws Exception{
+		try {
+			ClienteDao cliDao = new ClienteDao();
+			ArrayList<Cliente> c = (ArrayList<Cliente>) cliDao.findAll();
+			return c;
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
 	public void save(Cliente obj) throws Exception{
 		try {
 			ClienteDao cliDao = new ClienteDao();
