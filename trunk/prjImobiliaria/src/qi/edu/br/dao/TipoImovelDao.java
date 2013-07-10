@@ -7,7 +7,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import qi.edu.br.model.Cliente;
 import qi.edu.br.model.TipoImovel;
 
 public class TipoImovelDao {

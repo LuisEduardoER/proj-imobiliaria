@@ -5,20 +5,15 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.context.FacesContext;
-import javax.faces.model.SelectItem;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import qi.edu.br.bean.FuncionarioBean;
 import qi.edu.br.bean.PropostaBean;
 import qi.edu.br.dao.ClienteDao;
 import qi.edu.br.model.Cliente;
-import qi.edu.br.model.Funcionario;
 import qi.edu.br.model.Proposta;
 
 /**

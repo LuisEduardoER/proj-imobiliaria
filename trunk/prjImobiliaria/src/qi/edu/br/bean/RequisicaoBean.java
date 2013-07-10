@@ -5,13 +5,7 @@ import java.util.ArrayList;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 
-import qi.edu.br.dao.ClienteDao;
-import qi.edu.br.dao.FuncionarioDao;
-import qi.edu.br.dao.PropostaDao;
 import qi.edu.br.dao.RequisicaoDao;
-import qi.edu.br.model.Cliente;
-import qi.edu.br.model.Funcionario;
-import qi.edu.br.model.Proposta;
 import qi.edu.br.model.RequisicaoSenha;
 
 @Stateless

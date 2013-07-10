@@ -14,9 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.primefaces.event.FileUploadEvent;
 
 import qi.edu.br.bean.ImovelBean;
-import qi.edu.br.model.Cliente;
 import qi.edu.br.model.Imovel;
-import qi.edu.br.model.TipoImovel;
 
 @ManagedBean
 @ViewScoped
