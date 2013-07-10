@@ -27,7 +27,7 @@
 %>
 
 <body>
-	<h2>Cad.Proposta</h2>
+	<h2>Cadastro de Proposta</h2>
  	<hr/> 
 	<form action="../cadProposta" method="POST">
 	<table>
@@ -35,30 +35,31 @@
 			<td>Código Imóvel:</td>
 			<td><input type="text" name="codImovel" 
 				value="<%out.println(tp.getId());%>"/></td>
-			<td>Nome do Imóvel:</td>
+			<td><font color="red">Nome do Imóvel:</font></td>
 			<td><input type="text" name="nomeImovel" 
 				value="<%out.println(tp.getNome());%>"/></td>
 		</tr>
 		<tr>
-			<td>Nome do Cliente:</td>
+			<td><font color="red">Nome do Cliente:</font></td>
 			<td><input type="text" name="nomeCliente"
 				value="<%//out.println(c.getNome());%>"/></td>
 		</tr>
 		<tr>
-			<td>Valor Proposto:</td>
+			<td><font color="red">Valor Proposto:</font></td>
 			<td><input type="text" name="valorProposta"/></td>
 		</tr>
 		<tr>
-			<td>Valor Venda:</td>
-			<td><input type="text" name="valorVenda"/></td>
+			<td><font color="red">Valor Venda:</font></td>
+			<td><input type="text" name="valorVenda"
+				value="<%out.println(tp.getValor());%>"/></td>
 		</tr>
 		<tr>
-			<td>Tipo:</td>
+			<td><font color="red">Tipo:</font></td>
 			<td><input type="text" name="tipo"/></td>
 		</tr>
 		
 		<tr>
-			<td>Forma Pamento:</td>
+			<td><font color="red">Forma Pamento:</font></td>
 			<td>
 				<select name="cbFormaPag">
 					<option value="0">Dinheiro a vista</option>

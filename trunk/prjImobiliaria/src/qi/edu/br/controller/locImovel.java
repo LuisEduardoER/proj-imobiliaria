@@ -2,8 +2,6 @@ package qi.edu.br.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,8 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import qi.edu.br.bean.ClienteBean;
+import qi.edu.br.bean.FuncionarioBean;
 import qi.edu.br.bean.ImovelBean;
+import qi.edu.br.bean.TipoImovelBean;
+import qi.edu.br.model.Cliente;
+import qi.edu.br.model.Funcionario;
 import qi.edu.br.model.Imovel;
+import qi.edu.br.model.TipoImovel;
 
 
 /**
@@ -45,17 +49,36 @@ public class locImovel extends HttpServlet {
 			Imovel i = new Imovel();
 			if (!request.getParameter("codigo").equals(""))
 			  i.setId(Integer.parseInt(request.getParameter("codigo")));
-			//i.setData_imovel(Date.parse((request.getParameter("data")));
-			if (!request.getParameter("valor").equals(""))
-				i.setValor(Double.parseDouble(request.getParameter("valor")));
-			if (!request.getParameter("cbTipoImovel").equals(""))
-				i.setIdTipoImovel(Integer.parseInt(request.getParameter("cbTipoImovel")));
-			i.setSituacao(request.getParameter("situacao"));
 			
 			ImovelBean ibean = new ImovelBean();
 			i = ibean.find(i);
-			//List<Imovel> lista = ibean.localizaImovel(i);
-			request.getSession().setAttribute("Imovel", i); //lista
+			request.getSession().setAttribute("Imovel", i); 
+			
+			//busca o cliente
+			Cliente c = new Cliente();
+			c.setId(i.getIdCliente());
+			
+			ClienteBean cbean = new ClienteBean();
+			c = cbean.find(c);					
+			request.getSession().setAttribute("cliente", c);
+			
+			//busca o funcionario
+			Funcionario f = new Funcionario();
+			f.setId(i.getIdFuncionario());
+			
+			FuncionarioBean fbean = new FuncionarioBean();
+			f = fbean.find(f);	
+			
+			request.getSession().setAttribute("funcionario", f);
+			
+			//busca o tipo de imovel
+			TipoImovel tp = new TipoImovel();
+			tp.setId(i.getIdCliente());
+			
+			TipoImovelBean tpBean = new TipoImovelBean();
+			tp = tpBean.find(tp);	
+			request.getSession().setAttribute("tipoImovel", tp);
+			
 			response.sendRedirect("view/locImovel.jsp");
 		} catch (Exception e) {			
 			out.println(e.toString());
