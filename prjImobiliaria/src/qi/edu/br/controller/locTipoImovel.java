@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import qi.edu.br.bean.FuncionarioBean;
 import qi.edu.br.bean.TipoImovelBean;
-import qi.edu.br.model.Funcionario;
 import qi.edu.br.model.TipoImovel;
 
 /**

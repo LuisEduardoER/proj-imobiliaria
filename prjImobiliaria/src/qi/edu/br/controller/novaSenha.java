@@ -9,10 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import qi.edu.br.bean.FuncionarioBean;
 import qi.edu.br.bean.RequisicaoBean;
 import qi.edu.br.model.Cliente;
-import qi.edu.br.model.Funcionario;
 import qi.edu.br.model.JavaMailApp;
 import qi.edu.br.model.RequisicaoSenha;
 
