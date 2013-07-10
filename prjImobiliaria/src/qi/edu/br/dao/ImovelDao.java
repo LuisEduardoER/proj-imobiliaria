@@ -75,6 +75,21 @@ public class ImovelDao {
 		}
 	}
 	
+	public Imovel consultarWS(int codigo) throws Exception{
+		EntityManager em = getEntityManager();
+		try {
+			em.getTransaction().begin(); // inicia o processo de transacao
+			Imovel novo = em.find(Imovel.class, codigo);
+			return novo;
+		} catch (Exception e) {
+			em.getTransaction().rollback();// se rolar uma excecao cancelo acao
+			e.printStackTrace();// mostro o percurso de onde veio as excecoes
+			throw e;
+		} finally {
+			em.close();
+		}
+	}
+	
 	public List<Imovel> localizaImovel(Imovel imovel) throws Exception{
 		EntityManager em = getEntityManager();
 		String x = ""; 
