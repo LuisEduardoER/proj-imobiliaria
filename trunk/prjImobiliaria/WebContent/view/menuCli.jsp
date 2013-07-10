@@ -22,7 +22,7 @@
  			<td></td>
  			<td style="border-left : 1px solid;">
  				<ul> 					
- 					<li><a href="locImovel.jsp">localizar Imóvel</a></li>
+ 					<li><a href="locImovel.jsp">Localizar Imóvel</a></li>
  				</ul>
  			</td>
  		</tr>

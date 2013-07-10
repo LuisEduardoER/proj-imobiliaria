@@ -16,22 +16,22 @@
  		<tr>
  			<td>
  				<ul>
- 					<li><a href="cadCliente.xhtml">Cad.Cliente</a></li>
- 					<li><a href="cadFuncionario.xhtml">Cad.Funcionário</a></li>
- 					<li><a href="cadImovel.xhtml">Cad.Imóvel</a></li>
- 					<li><a href="cadTipoImovel.xhtml">Cad.Tipo de Imóvel</a></li>
- 					<li><a href="cadProposta.jsp">Cad.Propostas</a></li>
+ 					<li><a href="cadCliente.xhtml">Cadastrar Cliente</a></li>
+ 					<li><a href="cadFuncionario.xhtml">Cadastrar Funcionário</a></li>
+ 					<li><a href="cadImovel.xhtml">Cadastrar Imóvel</a></li>
+ 					<li><a href="cadTipoImovel.xhtml">Cadastrar Tipo de Imóvel</a></li>
+ 					<li><a href="cadProposta.jsp">Cadastrar Propostas</a></li>
  				</ul>
  			</td>
  			<td></td>
  			<td style="border-left : 1px solid;">
  				<ul>
- 					<li><a href="locImovel.jspl">localizar Imóvel</a></li>
- 					<li><a href="locCliente.jsp">localizar Cliente</a></li>
- 					<li><a href="locFuncionario.jsp">localizar Funcionário</a></li>
- 					<li><a href="locTipoImovel.jsp">localizar Tipo de Imóvel</a></li>
- 					<li><a href="locPropostas.jsp">localizar Propostas</a></li>
- 					<li><a href="locRequisicao.jsp">localizar Requisições</a></li>
+ 					<li><a href="locImovel.jsp">Localizar Imóvel</a></li>
+ 					<li><a href="locCliente.jsp">Localizar Cliente</a></li>
+ 					<li><a href="locFuncionario.jsp">Localizar Funcionário</a></li>
+ 					<li><a href="locTipoImovel.jsp">Localizar Tipo de Imóvel</a></li>
+ 					<li><a href="locPropostas.jsp">Localizar Propostas</a></li>
+ 					<li><a href="locRequisicao.jsp">Localizar Requisições</a></li>
 				</ul>
  			</td>
  		</tr>
