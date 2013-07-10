@@ -2,8 +2,11 @@ package qi.edu.br.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +16,8 @@ import javax.servlet.http.HttpSession;
 
 import qi.edu.br.bean.FuncionarioBean;
 import qi.edu.br.bean.PropostaBean;
+import qi.edu.br.dao.ClienteDao;
+import qi.edu.br.model.Cliente;
 import qi.edu.br.model.Funcionario;
 import qi.edu.br.model.Proposta;
 
@@ -45,7 +50,7 @@ public class cadProposta extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		try {
 			Proposta p = new Proposta();
-			p.setIdCliente(Integer.parseInt(request.getParameter("codCliente")));
+			p.setIdCliente(Integer.parseInt(request.getParameter("cbNomeCliente")));
 			p.setIdImovel(Integer.parseInt(request.getParameter("codImovel")));
 			p.setTipo(request.getParameter("tipo"));
 			p.setValorProposto(Double.parseDouble(request.getParameter("valorProposta")));
@@ -64,5 +69,17 @@ public class cadProposta extends HttpServlet {
 			out.println(e.toString());
 		}
 	}
+	
+	public List<Cliente> getListaCliente() throws Exception { //
+        ArrayList<Cliente> lista = new ArrayList<Cliente>();
+        ClienteDao clienteDao = new ClienteDao();
+        List<Cliente> resultado = (List<Cliente>) clienteDao.findAll();
+
+        for (Cliente cliente : resultado) {
+            lista.add(cliente);
+        }
+        
+        return lista;
+    }
 
 }

@@ -53,6 +53,7 @@
  		<td>Valor Proposto</td>
  		<td>Tipo</td>
  		<td>Cód.Cliente</td>
+ 		<td>Forma de Pag.</td>
  		<td colspan="3">Ações</td>
  	</tr>
 <%
@@ -68,6 +69,14 @@
 			out.println("<td>"+p.getValorProposto());out.println("</td>");
 			out.println("<td>"+p.getTipo());out.println("</td>");
 			out.println("<td>"+p.getIdCliente());out.println("</td>");
+			String formaPag;
+			
+			if (p.getFormaPag() == 0){
+				formaPag = "Dinheiro a vista";
+			} else {
+				formaPag = "Cartão de Crédito";
+			}
+			out.println("<td>"+ formaPag);out.println("</td>");
 			out.println("<td><a href=\'locPropostas.jsp?excluir=excluir&id="+p.getId()+"\'>Excluir</a>");out.println("</td>");
 			out.println("<td><a href=\'locPropostas.jsp?email=email&id="+p.getId()+"\'>Enviar(e-mail)</a>");out.println("</td>");
 		out.println("</tr>");
