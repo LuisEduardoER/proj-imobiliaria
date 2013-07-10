@@ -80,33 +80,6 @@ function validar() {
 				<td>Código:</td>
 				<td><input type="text" name="codigo" /></td>
 			</tr>
-
-			<tr>
-				<td>Faixa de Valor:</td>
-				<td><input type="text" name="valor" /></td>
-			</tr>
-
-			<tr>
-				<td>Tipo de Imóvel:</td>
-				<td><sql:query var="qryTipoImovel" dataSource="${ds}">
-						select * from tipo_Imovel where ativo = 1 order by descricao
-		         	</sql:query> <select name="cbTipoImovel">
-						<c:forEach var="tipoImovel" items="${qryTipoImovel.rows}">
-							<option Value="-1">Todos os Tipos</option>
-							<option value="${tipoImovel.id}">${tipoImovel.descricao}</option>
-						</c:forEach>
-				</select></td>
-			</tr>
-
-			<tr>
-				<td>Situação do Imóvel:</td>
-				<td><select name="situacao">
-						<option value="-1">Todas as Situações</option>
-						<option value="0">Planta</option>
-						<option value="1">Novo</option>
-						<option value="2">Usado</option>
-				</select></td>
-			</tr>
 			<tr>
 				<td><input class="btn btn-primary" type="button" name="enviar"
 					value="Consultar" onclick="validar()" /></td>
