@@ -4,9 +4,15 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name = "Imovel")
@@ -16,19 +22,32 @@ public class Imovel  implements Serializable {
 	@Id
 	@GeneratedValue
 	private int id;
+	//@OneToOne(mappedBy="Imovel", fetch = FetchType.LAZY)
 	private int idCliente;
+	//@OneToOne(mappedBy="Imovel", fetch = FetchType.LAZY)
 	private int idFuncionario;
+	//@OneToOne(mappedBy="Imovel", fetch = FetchType.LAZY)
+	//(fetch= FetchType.EAGER)
+	//@JoinColumn(name="idTipoImovel", insertable=true, updatable=true) 
+	//@Fetch(FetchMode.JOIN)
 	private int idTipoImovel;
+
 	private String nome;
 	private String situacao;
 	private String foto_capa;
 	private double valor;
 	private String descricao;
 	private String status;
-	private int ativo;
 	private Date data_imovel;
+	private String ativo;	
 	
 	
+	public String getAtivo() {
+		return ativo;
+	}
+	public void setAtivo(String ativo) {
+		this.ativo = ativo;
+	}
 	public String getStatus() {
 		return status;
 	}
@@ -60,9 +79,12 @@ public class Imovel  implements Serializable {
 	public void setIdTipoImovel(int idTipoImovel) {
 		this.idTipoImovel = idTipoImovel;
 	}
+	
+	
 	public String getNome() {
 		return nome;
 	}
+	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
@@ -95,14 +117,6 @@ public class Imovel  implements Serializable {
 	}
 	public void setData_imovel(Date date) {
 		this.data_imovel = date;
-	}
-	public int getAtivo() {
-		return ativo;
-	}
-	public void setAtivo(int ativo) {
-		this.ativo = ativo;
-	}
-	
-	
+	}	
 
 }

@@ -14,7 +14,9 @@ import javax.servlet.http.HttpSession;
 import org.primefaces.event.FileUploadEvent;
 
 import qi.edu.br.bean.ImovelBean;
+import qi.edu.br.model.Cliente;
 import qi.edu.br.model.Imovel;
+import qi.edu.br.model.TipoImovel;
 
 @ManagedBean
 @ViewScoped
@@ -36,6 +38,7 @@ public class ImovelMB {
 	private String alterar;
 	private String msgAviso;
 	private String status;
+	private String ativo;
 
 	private List<SelectItem> listaCliente;
 	private List<SelectItem> listaFuncionario;
@@ -45,6 +48,17 @@ public class ImovelMB {
         FacesMessage msg = new FacesMessage("Sucesso", event.getFile().getFileName() + " is uploaded.");  
         FacesContext.getCurrentInstance().addMessage(null, msg);  
     }
+	
+
+	public String getAtivo() {
+		return ativo;
+	}
+
+
+	public void setAtivo(String ativo) {
+		this.ativo = ativo;
+	}
+
 
 	public ImovelMB() throws Exception {
 		super(); 
@@ -53,6 +67,27 @@ public class ImovelMB {
 		
 		this.listaFuncionario = imovelBean.getListaFuncionario();
 		this.listaTipoImovel = imovelBean.getListaTipoImovel();
+		
+		FacesContext context = FacesContext.getCurrentInstance(); 
+		HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
+		if(session.getAttribute("verificaImovel")!= null){
+			Imovel imovel;
+			imovel = new Imovel();
+			imovel = (Imovel) session.getAttribute("imovelAlt");
+			this.setNome(imovel.getNome());
+			this.setData_imovel(imovel.getData_imovel());
+			this.setDescricao(imovel.getDescricao());
+			this.setId(imovel.getId());
+			this.setIdCliente(imovel.getIdCliente());
+			this.setIdFuncionario(imovel.getIdFuncionario());
+			
+			this.setIdTipoImovel(imovel.getIdTipoImovel());
+			this.setSituacao(imovel.getSituacao());
+			this.setStatus(imovel.getStatus());
+			this.setValor(imovel.getValor());		
+			this.setAlterar("1");
+			session.removeAttribute("verificaCli");
+		}
 	}
 
 	public List<SelectItem> getListaFuncionario() {
@@ -93,7 +128,7 @@ public class ImovelMB {
 			obj.setNome(nome);
 			obj.setSituacao(situacao);
 			obj.setValor(valor);			
-			obj.setAtivo(1);//Integer.parseInt(status));
+			obj.setStatus(status);
 			
 			if(alterar != null){
 				obj.setId(id);
@@ -162,12 +197,16 @@ public class ImovelMB {
 	public void setIdFuncionario(int idFuncionario) {
 		this.idFuncionario = idFuncionario;
 	}
+	
+
 	public int getIdTipoImovel() {
 		return idTipoImovel;
 	}
+
 	public void setIdTipoImovel(int idTipoImovel) {
 		this.idTipoImovel = idTipoImovel;
 	}
+
 	public String getNome() {
 		return nome;
 	}
@@ -220,4 +259,15 @@ public class ImovelMB {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+
+	public String getAlterar() {
+		return alterar;
+	}
+
+
+	public void setAlterar(String alterar) {
+		this.alterar = alterar;
+	}
+	
 }

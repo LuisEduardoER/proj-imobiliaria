@@ -93,7 +93,7 @@ public class ImovelBean {
         TipoImovelDao tipoImovelDao = new TipoImovelDao();
         List<TipoImovel> resultado = (List<TipoImovel>) tipoImovelDao.findAll();
 
-        for (TipoImovel tipoImovel : resultado) {
+       for (TipoImovel tipoImovel : resultado) {
             SelectItem item = new SelectItem(tipoImovel.getId(), tipoImovel.getDescricao());
             lista.add(item);
         }

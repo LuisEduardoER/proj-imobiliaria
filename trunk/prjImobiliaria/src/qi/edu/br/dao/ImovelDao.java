@@ -77,26 +77,39 @@ public class ImovelDao {
 	
 	public List<Imovel> localizaImovel(Imovel imovel) throws Exception{
 		EntityManager em = getEntityManager();
-		String x = "";
-		
-		if (!String.valueOf(imovel.getId()).equals(""))
-			x= " and id = " + imovel.getId(); 
-		if ((!String.valueOf(imovel.getValor()).equals("")) && !(imovel.getValor() == 0))
-			x= " and valor = " + imovel.getValor(); 
-		
-		if (imovel.getIdTipoImovel() != -1)
-			x= " and idTipoImovel = " + imovel.getIdTipoImovel(); 
-		
-		if (!imovel.getSituacao().equals("-1"))
-			x= " and situacao = " + imovel.getSituacao(); 
+		String x = ""; 
 		
 		try {
 			em.getTransaction().begin(); // inicia o processo de transacao
-			Query query = em.createQuery("select f from Imovel f where 1=1 "
-			+ x		
-			+ "order by nome");
+			/*x="select i from Imovel i where 1 = 1 ";
+			if ((!String.valueOf(imovel.getId()).equals("")) && !String.valueOf(imovel.getId()).equals("0"))
+				x= x + " and :id = ";// + imovel.getId(); 
+			if ((!String.valueOf(imovel.getValor()).equals("")) && !(imovel.getValor() == 0))
+				x= " and :valor = ";// + imovel.getValor(); 
 			
-			return query.getResultList();
+			if (imovel.getIdTipoImovel() != -1)
+				x= " and :idTipoImovel = ";// + imovel.getIdTipoImovel(); 
+			
+			if (!imovel.getSituacao().equals("-1"))
+				x= " and :situacao = ";// + imovel.getSituacao();
+			*/
+			x = "select i from Imovel i "; 
+			Query query = em.createQuery(x);
+			
+			/*if ((!String.valueOf(imovel.getId()).equals("")) && !String.valueOf(imovel.getId()).equals("0"))
+				query.setParameter("id", imovel.getId()); 
+			if ((!String.valueOf(imovel.getValor()).equals("")) && !(imovel.getValor() == 0))
+				query.setParameter("valor", imovel.getValor()); 
+			
+			if (imovel.getIdTipoImovel() != -1)
+				query.setParameter("idTipoImovel", imovel.getIdTipoImovel()); 
+			
+			if (!imovel.getSituacao().equals("-1"))
+				query.setParameter("situacao", imovel.getSituacao()); 
+			*/
+			
+			List<Imovel> lista = query.getResultList();
+			return lista;
 		} catch (Exception e) {
 			em.getTransaction().rollback();// se rolar uma excecao cancelo acao
 			e.printStackTrace();// mostro o percurso de onde veio as excecoes
