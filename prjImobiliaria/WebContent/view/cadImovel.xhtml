@@ -48,9 +48,10 @@
 		
 		<tr>
 			<td><h:outputLabel value="Tipo de Imóvel"/></td>
-			<td><h:selectOneMenu value="#{imovelMB.idTipoImovel}">
-            		<f:selectItems value="#{imovelMB.listaTipoImovel}" />
-				</h:selectOneMenu> 
+			<td><h:selectOneMenu value="#{imovelMB.idTipoImovel}" label="tipoImovel">
+            		<f:selectItems value="#{imovelMB.listaTipoImovel}" 
+            			var="tipo" itemLabel="#{tipo.descricao}" itemValue="#{tipo.id}"/>
+				</h:selectOneMenu>   
 			</td>
 		</tr>
 		

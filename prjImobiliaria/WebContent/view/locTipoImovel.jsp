@@ -19,18 +19,36 @@
 <title>Consultar Tipo de Imóvel</title>
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
 <link rel="stylesheet" href="../css/bootstrap-responsive.min.css" type="text/css" />
+<script language="javascript" type="text/javascript">  
+function validar() {  
+      
+    var codigo = principal.codigo.value;  
+  
+    if (codigo == "") {  
+        alert('Preencha o campo código do Funcionário.');  
+        principal.codigo.focus();  
+        return false;  
+	} if (isNaN(codigo)){
+		alert('Preencha o campo com somente números.');  
+        principal.codigo.focus();  
+        return false;  
+	} else {
+		document.forms[0].submit();
+	}
+} 
+</script>  
 </head>
 <body>
 	<h2>Localizar Tipo de Imóvel</h2>
  	<hr/> 
-	<form action="../locTipoImovel" method="POST">
+	<form name="principal" action="../locTipoImovel" method="POST">
 	<table>
 		<tr>
 			<td>Código:</td>
 			<td><input type="text" name="codigo"/></td>
 		</tr>
 		<tr>
-			<td><input class="btn btn-primary" type="submit" name="enviar" value="Consultar" /></td>
+			<td><input class="btn btn-primary" onclick="validar()" type="button" name="enviar" value="Consultar" /></td>
 			<td><input class="btn btn-primary" type="reset" name="limpar" value="Limpar" /></td>
 		</tr>
 	</table>

@@ -50,11 +50,9 @@ public class cadProposta extends HttpServlet {
 			p.setTipo(request.getParameter("tipo"));
 			p.setValorProposto(Double.parseDouble(request.getParameter("valorProposta")));
 			p.setValorVenda(Double.parseDouble(request.getParameter("valorVenda")));
+			p.setFormaPag(Integer.parseInt(request.getParameter("cbFormaPag")));
 			PropostaBean pbean = new PropostaBean();
-			pbean.save(p);
-			
-			
-			
+			pbean.save(p);			
 			
 			if(request.getSession().getAttribute("tipoUsuario") == "1"){
 				response.sendRedirect("view/menuFunc.jsp?msg=cadastrar");

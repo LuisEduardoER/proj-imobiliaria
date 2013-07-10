@@ -25,6 +25,14 @@ public class Proposta implements Serializable {
 	@Column(name="id_cliente")
 	private int idCliente;
 	
+	private int formaPag;
+	
+	public int getFormaPag() {
+		return formaPag;
+	}
+	public void setFormaPag(int formaPag) {
+		this.formaPag = formaPag;
+	}
 	public int getId() {
 		return id;
 	}

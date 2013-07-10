@@ -10,10 +10,19 @@
 		response.sendRedirect("cadImovel.xhtml");
 
 	}
+
+	if (request.getParameter("enviar") != null) {
+		qi.edu.br.model.Imovel tp = new qi.edu.br.model.Imovel();
+		tp.setId(Integer.parseInt(request.getParameter("id")));
+		qi.edu.br.bean.ImovelBean tpbean = new qi.edu.br.bean.ImovelBean();
+		tp = tpbean.find(tp);
+		session.setAttribute("imovel", tp);
+
+	}
 %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
-<%@page import="java.util.ArrayList" %>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <html>
@@ -23,23 +32,53 @@
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
 <link rel="stylesheet" href="../css/bootstrap-responsive.min.css"
 	type="text/css" />
-	<sql:setDataSource var="ds" driver="com.mysql.jdbc.Driver" 
-    	url="jdbc:mysql://localhost:3306/dbImovel" user="root" password="" 
-    	scope="session"/>
+<sql:setDataSource var="ds" driver="com.mysql.jdbc.Driver"
+	url="jdbc:mysql://localhost:3306/dbImovel" user="root" password=""
+	scope="session" />
+
+<script language="javascript" type="text/javascript">  
+function validar() {  
+      
+    var codigo = principal.codigo.value;
+    var valor = principal.valor.value;  
+  
+    
+    if (codigo != "") {  
+        if (isNaN(codigo)){
+			alert('Preencha o campo com somente números.');  
+        	principal.codigo.focus();  
+        	return false;
+        }
+	}   
+    
+   	if (valor != "") {  
+   	    if (isNaN(valor)){
+			alert('Preencha o campo valor com uma informação válida.');  
+  	     	principal.valor.focus();  
+        	return false;
+        } else {
+    	  	var pattern = /^\d+.?\d*$/;    	
+       		if ( valor.match(pattern)==null ){
+       			alert("Não é um valor válido.");
+       			return false;
+       		}
+       	}
+    } else {
+		document.forms[0].submit();
+	}
+	
+} 
+</script>
+
 </head>
 <body>
 	<h2>Localizar Imóvel</h2>
 	<hr />
-	<form action="../locImovel" method="POST">
+	<form name="principal" action="../locImovel" method="POST">
 		<table>
 			<tr>
 				<td>Código:</td>
 				<td><input type="text" name="codigo" /></td>
-			</tr>
-
-			<tr>
-				<td>Data de Cadastro:</td>
-				<td><input type="text" name="data" /></td>
 			</tr>
 
 			<tr>
@@ -49,32 +88,28 @@
 
 			<tr>
 				<td>Tipo de Imóvel:</td>
-				<td>
-					<sql:query var="qryTipoImovel" dataSource="${ds}">
+				<td><sql:query var="qryTipoImovel" dataSource="${ds}">
 						select * from tipo_Imovel where ativo = 1 order by descricao
-		         	</sql:query> 
-		         	
-		         	<select name="cbTipoImovel">
+		         	</sql:query> <select name="cbTipoImovel">
 						<c:forEach var="tipoImovel" items="${qryTipoImovel.rows}">
-							<option Value="-1">Todos os Tipos </option>
+							<option Value="-1">Todos os Tipos</option>
 							<option value="${tipoImovel.id}">${tipoImovel.descricao}</option>
 						</c:forEach>
-					</select>
-				</td>
+				</select></td>
 			</tr>
 
 			<tr>
 				<td>Situação do Imóvel:</td>
 				<td><select name="situacao">
-					<option value="-1">Todas as Situações</option>
-					<option value="0">Planta</option>
-					<option value="1">Novo</option>
-					<option value="2">Usado</option>
+						<option value="-1">Todas as Situações</option>
+						<option value="0">Planta</option>
+						<option value="1">Novo</option>
+						<option value="2">Usado</option>
 				</select></td>
 			</tr>
 			<tr>
-				<td><input class="btn btn-primary" type="submit" name="enviar"
-					value="Consultar" /></td>
+				<td><input class="btn btn-primary" type="button" name="enviar"
+					value="Consultar" onclick="validar()" /></td>
 				<td><input class="btn btn-primary" type="reset" name="limpar"
 					value="Limpar" /></td>
 			</tr>
@@ -83,12 +118,12 @@
 
 	<%
 		if (request.getParameter("excluir") != null) {
-			qi.edu.br.model.TipoImovel tp = new qi.edu.br.model.TipoImovel();
+			qi.edu.br.model.Imovel tp = new qi.edu.br.model.Imovel();
 			tp.setId(Integer.parseInt(request.getParameter("id")));
-			qi.edu.br.bean.TipoImovelBean tpbean = new qi.edu.br.bean.TipoImovelBean();
-			tp = tpbean.find(tp);
-			tp.setAtivo(0);
-			tpbean.update(tp);
+			qi.edu.br.bean.ImovelBean ibean = new qi.edu.br.bean.ImovelBean();
+			tp = ibean.find(tp);
+			tp.setAtivo("0");
+			ibean.update(tp);
 
 			if (session.getAttribute("tipoUsuario") == "1") {
 				response.sendRedirect("menuFunc.jsp?msg=excluir");
@@ -98,40 +133,41 @@
 		}
 
 		if (session.getAttribute("Imovel") != null) {
-			ArrayList<qi.edu.br.model.Imovel> i;
-			
-			i = (ArrayList<qi.edu.br.model.Imovel>) session.getAttribute("Imovel"); //(List<qi.edu.br.model.Imovel>) 
-			
-			
+			//ArrayList<qi.edu.br.model.Imovel> i;
+
+			//i = (ArrayList<qi.edu.br.model.Imovel>) session
+					//.getAttribute("Imovel"); //(List<qi.edu.br.model.Imovel>) 
+
 			out.println("<table border='1px' width='300px' height='90px'>");
-			
+
 			out.println("<br />");
 			out.println("<br />");
 			out.println("<br />");
-			
-			for (qi.edu.br.model.Imovel tp : i) {
-			
+			qi.edu.br.model.Imovel tp = (qi.edu.br.model.Imovel) session.getAttribute("Imovel");
+
+			//for (qi.edu.br.model.Imovel tp : i) {
+
 				out.println("<tr>");
 				out.println("<td>Código:");
 				out.println("</td>");
 				out.println("<td>" + tp.getId());
 				out.println("</td>");
 				out.println("</tr>");
-	
+
 				out.println("<tr>");
 				out.println("<td>Nome:");
 				out.println("</td>");
 				out.println("<td>" + tp.getNome());
 				out.println("</td>");
 				out.println("</tr>");
-	
+
 				out.println("<tr>");
 				out.println("<td>Tipo:");
 				out.println("</td>");
 				out.println("<td>" + tp.getIdTipoImovel());
 				out.println("</td>");
 				out.println("</tr>");
-	
+
 				out.println("<tr>");
 				out.println("<td>Situação:");
 				out.println("</td>");
@@ -146,16 +182,16 @@
 					out.println("<td> Usado </td>");
 					break;
 				}
-	
+
 				out.println("</tr>");
-	
+
 				out.println("<tr>");
 				out.println("<td>Valor:");
 				out.println("</td>");
 				out.println("<td>" + tp.getValor());
 				out.println("</td>");
 				out.println("</tr>");
-	
+
 				out.println("<tr>");
 				out.println("<td><a href=\'locImovel.jsp?alterar=alterar&id="
 						+ tp.getId() + "\'>Alterar</a>");
@@ -164,11 +200,11 @@
 						+ tp.getId() + "\'>Excluir</a>");
 				out.println("</td>");
 				out.println("</td>");
-				out.println("<td><a href=\'cadproposta.jsp?excluir=excluir&id="
+				out.println("<td><a href=\'cadProposta.jsp?enviar=enviar&id="
 						+ tp.getId() + "\'>Enviar Proposta</a>");
 				out.println("</td>");
 				out.println("</tr>");
-			}
+			//}
 
 			out.println("</table>");
 

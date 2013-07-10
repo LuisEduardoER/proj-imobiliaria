@@ -2,6 +2,7 @@ package qi.edu.br.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -42,10 +43,19 @@ public class locImovel extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		try {
 			Imovel i = new Imovel();
-			i.setId(Integer.parseInt(request.getParameter("codigo")));
+			if (!request.getParameter("codigo").equals(""))
+			  i.setId(Integer.parseInt(request.getParameter("codigo")));
+			//i.setData_imovel(Date.parse((request.getParameter("data")));
+			if (!request.getParameter("valor").equals(""))
+				i.setValor(Double.parseDouble(request.getParameter("valor")));
+			if (!request.getParameter("cbTipoImovel").equals(""))
+				i.setIdTipoImovel(Integer.parseInt(request.getParameter("cbTipoImovel")));
+			i.setSituacao(request.getParameter("situacao"));
+			
 			ImovelBean ibean = new ImovelBean();
-			List<Imovel> lista = ibean.localizaImovel(i);
-			request.getSession().setAttribute("imovel", lista);
+			i = ibean.find(i);
+			//List<Imovel> lista = ibean.localizaImovel(i);
+			request.getSession().setAttribute("Imovel", i); //lista
 			response.sendRedirect("view/locImovel.jsp");
 		} catch (Exception e) {			
 			out.println(e.toString());
