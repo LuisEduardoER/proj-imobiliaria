@@ -6,6 +6,8 @@ import java.util.List;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.faces.model.SelectItem;
+import javax.jws.WebMethod;
+import javax.jws.WebService;
 
 import qi.edu.br.dao.ClienteDao;
 import qi.edu.br.dao.FuncionarioDao;
