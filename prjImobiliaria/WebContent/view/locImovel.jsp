@@ -39,33 +39,19 @@
 <script language="javascript" type="text/javascript">  
 function validar() {  
       
-    var codigo = principal.codigo.value;
-    var valor = principal.valor.value;  
-  
+    var codigo = principal.codigo.value;  
     
-    if (codigo != "") {  
-        if (isNaN(codigo)){
-			alert('Preencha o campo com somente números.');  
-        	principal.codigo.focus();  
-        	return false;
-        }
-	}   
-    
-   	if (valor != "") {  
-   	    if (isNaN(valor)){
-			alert('Preencha o campo valor com uma informação válida.');  
-  	     	principal.valor.focus();  
-        	return false;
-        } else {
-    	  	var pattern = /^\d+.?\d*$/;    	
-       		if ( valor.match(pattern)==null ){
-       			alert("Não é um valor válido.");
-       			return false;
-       		}
-       	}
-    } else {
+    if (codigo == "") {  
+        alert('Campo em vermelho de preenchimento obrigatório.');  
+        principal.codigo.focus();  
+        return false;  
+	} if (isNaN(codigo)){
+		alert('Preencha o campo com somente números.');  
+        principal.codigo.focus();  
+        return false;  
+	} else {
 		document.forms[0].submit();
-	}
+	}  
 	
 } 
 </script>
@@ -77,7 +63,7 @@ function validar() {
 	<form name="principal" action="../locImovel" method="POST">
 		<table>
 			<tr>
-				<td>Código:</td>
+				<td><font color="red">Código:</font></td>
 				<td><input type="text" name="codigo" /></td>
 			</tr>
 			<tr>
@@ -111,7 +97,7 @@ function validar() {
 			//i = (ArrayList<qi.edu.br.model.Imovel>) session
 					//.getAttribute("Imovel"); //(List<qi.edu.br.model.Imovel>) 
 
-			out.println("<table border='1px' width='300px' height='90px'>");
+			out.println("<table class='table' width='300px' height='90px'>");
 
 			out.println("<br />");
 			out.println("<br />");
@@ -134,13 +120,16 @@ function validar() {
 				out.println("</td>");
 				out.println("</tr>");
 
-				out.println("<tr>");
-				out.println("<td>Tipo:");
-				out.println("</td>");
-				out.println("<td>" + tp.getIdTipoImovel());
-				out.println("</td>");
-				out.println("</tr>");
-
+				if (session.getAttribute("tipoImovel") != null) {
+					qi.edu.br.model.TipoImovel ti = (qi.edu.br.model.TipoImovel) session.getAttribute("tipoImovel");
+					
+					out.println("<tr>");
+					out.println("<td>Tipo:");
+					out.println("</td>");
+					out.println("<td>" + ti.getDescricao());
+					out.println("</td>");
+					out.println("</tr>");
+				}
 				out.println("<tr>");
 				out.println("<td>Situação:");
 				out.println("</td>");
@@ -164,6 +153,28 @@ function validar() {
 				out.println("<td>" + tp.getValor());
 				out.println("</td>");
 				out.println("</tr>");
+				
+				if (session.getAttribute("cliente") != null) {
+					qi.edu.br.model.Cliente c = (qi.edu.br.model.Cliente) session.getAttribute("cliente");
+					
+					out.println("<tr>");
+					out.println("<td>Cliente:");
+					out.println("</td>");
+					out.println("<td>" + c.getNome());
+					out.println("</td>");
+					out.println("</tr>");
+				}
+				
+				if (session.getAttribute("funcionario") != null) {
+					qi.edu.br.model.Funcionario f = (qi.edu.br.model.Funcionario) session.getAttribute("funcionario");
+					
+					out.println("<tr>");
+					out.println("<td>Funcionário:");
+					out.println("</td>");
+					out.println("<td>" + f.getNome());
+					out.println("</td>");
+					out.println("</tr>");
+				}
 
 				out.println("<tr>");
 				out.println("<td><a href=\'locImovel.jsp?alterar=alterar&id="

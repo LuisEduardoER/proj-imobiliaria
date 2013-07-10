@@ -121,7 +121,7 @@ public class ImovelMB {
 			obj = new Imovel();
 			obj.setData_imovel(new Date());
 			obj.setDescricao(descricao);
-			obj.setFoto_capa("11");
+			obj.setFoto_capa(foto_capa);
 			obj.setIdCliente(idCliente);
 			obj.setIdFuncionario(idFuncionario);
 			obj.setIdTipoImovel(idTipoImovel);

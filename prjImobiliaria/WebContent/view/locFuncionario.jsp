@@ -26,7 +26,7 @@ function validar() {
     var codigo = principal.codigo.value;  
   
     if (codigo == "") {  
-        alert('Preencha o campo código do Funcionário.');  
+        alert('Campo em vermelho de preenchimento obrigatório.');  
         principal.codigo.focus();  
         return false;  
 	} if (isNaN(codigo)){
@@ -46,7 +46,7 @@ function validar() {
 	<form name="principal" action="../locFuncionario" method="POST">
 	<table>
 		<tr>
-			<td>Código:</td>
+			<td><font color="red">Código:</font> </td>
 			<td><input type="text" name="codigo"/></td>
 		</tr>
 		<tr>

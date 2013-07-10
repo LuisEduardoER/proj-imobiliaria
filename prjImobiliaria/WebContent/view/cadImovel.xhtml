@@ -16,7 +16,7 @@
  <h:form>
  	<table>
  	    <tr>
- 			<td><h:outputLabel value="Status: "/></td>
+ 			<td><h:outputLabel value="Status: " style="color:#FF0000;" /></td>
  			<td>
  				<h:selectOneMenu value="#{imovelMB.status}">  
 	    			<f:selectItem itemLabel="Ativo" itemValue="1" />  
@@ -26,12 +26,12 @@
 		</tr> 
 		
  		<tr>
- 			<td><h:outputLabel value="Nome:"/></td>
+ 			<td><h:outputLabel value="Nome:" style="color:#FF0000;" /></td>
  			<td><h:inputText value="#{imovelMB.nome}" required="true" 
  				requiredMessage="Preencha o campo Nome do Imóvel!" /></td>
  		</tr>
 		<tr>
-			<td><h:outputLabel value="Cliente"/></td>
+			<td><h:outputLabel value="Cliente" style="color:#FF0000;" /></td>
 			<td><h:selectOneMenu value="#{imovelMB.idCliente}">
             		<f:selectItems value="#{imovelMB.listaCliente}" />
 				</h:selectOneMenu> 
@@ -39,7 +39,7 @@
 		</tr>
 		
 		<tr>
-			<td><h:outputLabel value="Funcionário"/></td>
+			<td><h:outputLabel value="Funcionário" style="color:#FF0000;" /></td>
 			<td><h:selectOneMenu value="#{imovelMB.idFuncionario}">
             		<f:selectItems value="#{imovelMB.listaFuncionario}" />
 				</h:selectOneMenu> 
@@ -47,7 +47,7 @@
 		</tr>
 		
 		<tr>
-			<td><h:outputLabel value="Tipo de Imóvel"/></td>
+			<td><h:outputLabel value="Tipo de Imóvel" style="color:#FF0000;" /></td>
 			<td><h:selectOneMenu value="#{imovelMB.idTipoImovel}" label="tipoImovel">
             		<f:selectItems value="#{imovelMB.listaTipoImovel}" 
             			var="tipo" itemLabel="#{tipo.descricao}" itemValue="#{tipo.id}"/>
@@ -56,7 +56,7 @@
 		</tr>
 		
 		<tr>
-			<td><h:outputLabel value="Situação"/></td>
+			<td><h:outputLabel value="Situação" style="color:#FF0000;" /></td>
 				
 			<td><h:selectOneMenu value="#{imovelMB.situacao}">
             		<f:selectItem itemLabel="Planta" itemValue="0"  />
@@ -67,15 +67,21 @@
 		</tr>
  	
  		<tr>
- 			<td><h:outputLabel value="Valor:"/></td>
+ 			<td><h:outputLabel value="Valor:" style="color:#FF0000;" /></td>
  			<td><h:inputText value="#{imovelMB.valor}" required="true" 
  				requiredMessage="Preencha o campo Valor do Imóvel!"/></td>
  		</tr>	
  		
  		<tr>
- 			<td><h:outputLabel value="Descrição:"/></td>
+ 			<td><h:outputLabel value="Descrição:" style="color:#FF0000;" /></td>
  			<td><h:inputText value="#{imovelMB.descricao}" required="true" 
  				requiredMessage="Preencha o campo Descrição do Imóvel!"/></td>
+ 		</tr>
+ 		
+ 		<tr>
+ 			<td><h:outputLabel value="Foto" style="color:#FF0000;" /></td>
+ 			<td><h:inputText value="#{imovelMB.foto_capa}" required="true" 
+ 				requiredMessage="Preencha o campo foto do Imóvel!"/></td>
  		</tr>	
 
 		
